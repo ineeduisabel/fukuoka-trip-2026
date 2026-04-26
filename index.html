@@ -225,19 +225,135 @@
   /* ==== RESPONSIVE ==== */
   @media (max-width: 640px) {
     .hero { padding: 60px 20px 70px; }
-    .hero-meta { padding: 14px 20px; gap: 20px; }
-    .hero-meta-item strong { font-size: 1.1rem; }
-    main { padding: 40px 16px; }
-    .timeline { padding-left: 30px; }
-    .stop { padding: 20px; }
-    .stop::before { left: -27px; }
-    .transport { margin-left: 30px; padding: 12px 16px; font-size: 0.85rem; }
+    .hero-eyebrow { font-size: 0.72rem; letter-spacing: 4px; }
+    .hero-meta { padding: 14px 18px; gap: 18px; }
+    .hero-meta-item { font-size: 0.85rem; }
+    .hero-meta-item strong { font-size: 1.05rem; }
+    .warning { padding: 14px 18px; font-size: 0.88rem; }
+    main { padding: 32px 14px 30px; }
+    .day-header { margin-bottom: 26px; padding-bottom: 20px; }
+    .day-meta { font-size: 0.75rem; letter-spacing: 2px; }
+    .day-meta-tag { font-size: 0.7rem; padding: 3px 8px; }
+    .day-title { font-size: 1.5rem; letter-spacing: 0.5px; }
+    .day-title-jp { font-size: 0.8rem; letter-spacing: 2px; }
+    .day-summary { font-size: 0.93rem; line-height: 1.75; }
+    .timeline { padding-left: 28px; }
+    .timeline::before { left: 11px; }
+    .stop { padding: 18px 18px; }
+    .stop::before { left: -26px; top: 26px; width: 12px; height: 12px; }
+    .stop-name { font-size: 1.1rem; }
+    .stop-jp-name { font-size: 0.82rem; margin-bottom: 12px; }
+    .stop-desc { font-size: 0.93rem; line-height: 1.75; }
+    .stop-time { font-size: 0.78rem; padding: 3px 10px; }
+    .stop-cat { font-size: 0.7rem; padding: 3px 8px; }
+    .info-block { padding: 11px 14px; font-size: 0.86rem; line-height: 1.7; }
+    .info-must ul { margin-left: 14px; }
+    .transport { margin-left: 28px; padding: 11px 14px; font-size: 0.82rem; gap: 8px; }
     .day-map iframe { height: 280px; }
-    .nav-tab { padding: 14px 10px; min-width: 90px; font-size: 0.8rem; }
-    .image-strip { margin: 16px -20px 16px; padding: 8px 20px 16px; }
-    .img-card { flex: 0 0 170px; height: 110px; }
-    .edu-table { font-size: 0.8rem; }
-    .edu-table th, .edu-table td { padding: 6px 8px; }
+    .day-map-cta { padding: 14px; font-size: 0.88rem; }
+    .nav-tab { padding: 13px 10px; min-width: 88px; font-size: 0.78rem; }
+    .nav-tab .day-num { font-size: 0.62rem; letter-spacing: 1.5px; }
+    .image-strip { margin: 14px -18px; padding: 6px 18px 14px; gap: 10px; }
+    .img-card { flex: 0 0 160px; height: 105px; padding: 10px; }
+    .img-card-emoji { font-size: 1.9rem; top: 10px; right: 10px; }
+    .img-card-label { font-size: 0.85rem; }
+    .img-card-sub { font-size: 0.66rem; }
+    .btn { padding: 7px 13px; font-size: 0.82rem; }
+
+    /* Plan switcher */
+    .plan-btn { padding: 13px 14px; font-size: 0.88rem; }
+    .plan-btn-tag { font-size: 0.62rem; letter-spacing: 1.5px; }
+
+    /* Reservations */
+    .reservations { padding: 22px 18px; }
+    .reservations h3 { font-size: 1.05rem; }
+    .reservations-list li { padding: 8px 0; font-size: 0.88rem; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .reservations-list em { font-size: 0.78rem; padding: 2px 8px; }
+
+    /* Hotels */
+    .hotel-tier-header { gap: 10px; flex-wrap: wrap; }
+    .hotel-tier-name { font-size: 1.2rem; }
+    .hotel-tier-price { font-size: 0.85rem; padding: 3px 10px; }
+    .hotel-card { padding: 18px; }
+    .hotel-name { font-size: 1.05rem; }
+    .hotel-features { font-size: 0.86rem; }
+    .hotel-rooms { font-size: 0.82rem; padding: 9px 12px; }
+    .hotel-price { font-size: 1.02rem; }
+    .hotel-tag { font-size: 0.68rem; padding: 2px 7px; }
+    .hotel-intro { padding: 22px 18px; font-size: 0.92rem; }
+
+    /* Edu section */
+    .edu-section { padding: 20px 18px; }
+    .edu-section h3 { font-size: 1.1rem; }
+    .edu-section > p { font-size: 0.92rem; }
+
+    /* === TABLE: convert to card layout on mobile === */
+    .edu-table { display: block; width: 100%; border: none; }
+    .edu-table thead { display: none; }
+    .edu-table tbody { display: block; }
+    .edu-table tr {
+      display: block;
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white !important;
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .edu-table tr:last-child { margin-bottom: 0; }
+    .edu-table td {
+      display: block;
+      border: none;
+      padding: 6px 0;
+      background: transparent !important;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      text-align: left;
+      color: var(--text);
+      white-space: normal;
+    }
+    .edu-table td:first-child {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 9px;
+      margin-bottom: 6px;
+      white-space: normal;
+    }
+    /* Pseudo-label for each cell using nth-child */
+    .edu-table.cols-pottery td:nth-child(2)::before { content: '產地'; }
+    .edu-table.cols-pottery td:nth-child(3)::before { content: '特色'; }
+    .edu-table.cols-pottery td:nth-child(4)::before { content: '等級 / 價位'; }
+    .edu-table.cols-pottery td:nth-child(5)::before { content: '怎麼挑'; }
+    .edu-table.cols-unagi td:nth-child(2)::before { content: '特色'; }
+    .edu-table.cols-unagi td:nth-child(3)::before { content: '價位'; }
+    .edu-table.cols-unagi td:nth-child(4)::before { content: '等待時間'; }
+    .edu-table td:not(:first-child)::before {
+      display: block;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 3px;
+    }
+  }
+
+  /* ==== Very narrow (Galaxy S, iPhone SE) ==== */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 1.7rem; letter-spacing: 2px; }
+    .hero-meta { gap: 14px; padding: 12px 14px; }
+    .nav-tab { min-width: 78px; padding: 12px 8px; font-size: 0.72rem; }
+    .nav-tab .day-num { font-size: 0.58rem; }
+    .plan-switcher { flex-direction: column; border-radius: 10px; }
+    .plan-btn { border-right: none; border-bottom: 1px solid var(--primary); padding: 12px; }
+    .plan-btn:last-child { border-bottom: none; }
+    .img-card { flex: 0 0 145px; height: 95px; }
+    .img-card-emoji { font-size: 1.6rem; }
+    .img-card-label { font-size: 0.78rem; }
+    .stop-actions { gap: 6px; }
+    .btn { padding: 6px 11px; font-size: 0.78rem; }
   }
 </style>
 </head>
@@ -426,7 +542,7 @@
     <h3>📚 出發前必懂：日本四大瓷器</h3>
     <p style="margin-bottom: 12px;">今天會看到的「<strong>有田燒、伊萬里燒、鍋島燒、唐津燒</strong>」之間的關係，搞懂之後逛窯元才會知道你在看什麼：</p>
 
-    <table class="edu-table">
+    <table class="edu-table cols-pottery">
       <thead>
         <tr><th>名稱</th><th>產地</th><th>特色</th><th>等級 / 價位</th><th>怎麼挑</th></tr>
       </thead>
@@ -1089,7 +1205,7 @@
 
       <div class="info-block info-must">
         <strong>🍱 三家鰻魚蒸籠飯比較：</strong>
-        <table class="edu-table">
+        <table class="edu-table cols-unagi">
           <thead><tr><th>店名</th><th>特色</th><th>價位</th><th>等待時間</th></tr></thead>
           <tbody>
             <tr><td><strong>元祖本吉屋</strong></td><td>1681 年創業，<em>蒸籠飯發源店</em>。Tabelog 3.72</td><td>¥4,500-8,000</td><td>2-3 小時（現點現做）</td></tr>
