@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>福岡 5 日深度遊 · 2026/5/1 - 5/5</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #BC002D;
+    --primary-dark: #8B0020;
+    --primary-light: #FCE8EC;
+    --bg: #FAF8F5;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-muted: #666;
+    --text-light: #999;
+    --border: #E5E5E0;
+    --accent: #C9A66B;
+    --accent-bg: #FBF6EC;
+    --warn-bg: #FFF8E1;
+    --warn-border: #F5B800;
+    --shadow: 0 2px 16px rgba(0,0,0,0.05);
+    --shadow-hover: 0 8px 24px rgba(0,0,0,0.10);
+    --grad-food: linear-gradient(135deg, #FF8E53, #FE6B8B);
+    --grad-pottery: linear-gradient(135deg, #4A6FA5, #6B8DD6);
+    --grad-shrine: linear-gradient(135deg, #C9A66B, #8B6F3F);
+    --grad-nature: linear-gradient(135deg, #56AB2F, #A8E063);
+    --grad-sea: linear-gradient(135deg, #00B4DB, #0083B0);
+    --grad-night: linear-gradient(135deg, #232526, #414345);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-weight: 400;
+  }
+  .jp { font-family: 'Noto Serif JP', serif; }
+
+  /* ==== HERO ==== */
+  .hero {
+    position: relative;
+    background: linear-gradient(135deg, #BC002D 0%, #6A0015 100%);
+    color: white;
+    padding: 90px 24px 100px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '福岡';
+    position: absolute;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: clamp(180px, 30vw, 380px);
+    color: rgba(255,255,255,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 20px;
+    user-select: none;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-eyebrow { text-transform: uppercase; letter-spacing: 6px; font-size: 0.85rem; margin-bottom: 16px; opacity: 0.85; font-weight: 500; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 16px; letter-spacing: 4px; }
+  .hero-subtitle { font-size: 1.05rem; opacity: 0.92; margin-bottom: 32px; letter-spacing: 1px; }
+  .hero-meta {
+    display: inline-flex; gap: 32px; flex-wrap: wrap; justify-content: center;
+    padding: 18px 36px; background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; backdrop-filter: blur(8px);
+  }
+  .hero-meta-item { font-size: 0.95rem; }
+  .hero-meta-item strong { display: block; font-size: 1.4rem; font-weight: 700; margin-top: 4px; }
+
+  /* ==== WARNING ==== */
+  .warning { background: var(--warn-bg); border-left: 4px solid var(--warn-border); padding: 18px 24px; max-width: 1200px; margin: 0 auto; font-size: 0.95rem; }
+  .warning strong { color: var(--primary); }
+
+  /* ==== TABS ==== */
+  .nav-wrap { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+  .nav-tabs { display: flex; gap: 0; max-width: 1200px; margin: 0 auto; overflow-x: auto; padding: 0 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab { flex: 1 0 auto; min-width: 110px; padding: 18px 16px; border: none; background: transparent; cursor: pointer; font-size: 0.9rem; color: var(--text-muted); text-decoration: none; transition: all 0.25s; text-align: center; border-bottom: 3px solid transparent; font-family: inherit; }
+  .nav-tab:hover { color: var(--primary); background: var(--primary-light); }
+  .nav-tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 700; }
+  .nav-tab .day-num { display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; font-weight: 500; }
+  .nav-tab.active .day-num { color: var(--primary); }
+
+  /* ==== MAIN ==== */
+  main { max-width: 1100px; margin: 0 auto; padding: 60px 20px 40px; }
+  .day-section, .hotel-section-wrap { display: none; animation: fadeIn 0.4s ease; }
+  .day-section.active, .hotel-section-wrap.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ==== DAY HEADER ==== */
+  .day-header { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 2px solid var(--primary); }
+  .day-meta { display: flex; gap: 12px; align-items: center; color: var(--accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; margin-bottom: 10px; flex-wrap: wrap; }
+  .day-meta-tag { display: inline-block; padding: 4px 12px; background: var(--accent-bg); border-radius: 4px; font-size: 0.75rem; color: var(--accent); letter-spacing: 1px; }
+  .day-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; margin: 8px 0 12px; letter-spacing: 1px; }
+  .day-title-jp { font-family: 'Noto Serif JP', serif; color: var(--text-light); font-weight: 400; font-size: 0.9rem; margin-bottom: 12px; letter-spacing: 4px; }
+  .day-summary { color: var(--text-muted); font-size: 1rem; line-height: 1.8; }
+
+  /* ==== DAY OVERVIEW MAP ==== */
+  .day-map { margin: 32px 0; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); background: white; }
+  .day-map iframe { width: 100%; height: 380px; border: 0; display: block; }
+  .day-map-cta { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary); color: white; text-align: center; padding: 16px; text-decoration: none; font-weight: 600; transition: background 0.2s; font-size: 0.95rem; }
+  .day-map-cta:hover { background: var(--primary-dark); }
+
+  /* ==== TIMELINE ==== */
+  .timeline { position: relative; padding-left: 40px; margin-top: 16px; }
+  .timeline::before { content: ''; position: absolute; left: 13px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--primary), var(--accent), var(--border)); }
+  .stop { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 26px 28px; margin-bottom: 24px; box-shadow: var(--shadow); transition: box-shadow 0.2s; }
+  .stop:hover { box-shadow: var(--shadow-hover); }
+  .stop::before { content: ''; position: absolute; left: -34px; top: 30px; width: 14px; height: 14px; border-radius: 50%; background: white; border: 3px solid var(--primary); z-index: 1; }
+  .stop.eat::before { border-color: #C9A66B; }
+  .stop.move::before { border-color: #6B9BD1; }
+  .stop.experience::before { border-color: #BC002D; }
+
+  .stop-time { display: inline-block; background: var(--primary); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
+  .stop.eat .stop-time { background: #C9A66B; }
+  .stop.move .stop-time { background: #6B9BD1; }
+  .stop-cat { display: inline-block; margin-left: 8px; padding: 4px 10px; background: var(--accent-bg); color: var(--accent); font-size: 0.75rem; border-radius: 4px; letter-spacing: 1px; font-weight: 500; }
+  .stop-name { font-size: 1.3rem; margin-bottom: 4px; font-weight: 700; letter-spacing: 0.5px; }
+  .stop-jp-name { font-family: 'Noto Serif JP', serif; color: var(--text-light); font-size: 0.9rem; margin-bottom: 14px; letter-spacing: 2px; }
+  .stop-desc { color: var(--text); margin-bottom: 12px; line-height: 1.85; }
+  .stop-desc strong { color: var(--primary); }
+  .stop-desc em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+  /* ==== INFO BLOCKS within stops ==== */
+  .info-block { margin: 16px 0; padding: 14px 18px; border-radius: 8px; font-size: 0.93rem; line-height: 1.75; }
+  .info-howto { background: #F0F6FF; border-left: 3px solid #4A6FA5; }
+  .info-howto strong { color: #2E4A7A; }
+  .info-must { background: #FFF5F0; border-left: 3px solid #E67E22; }
+  .info-must strong { color: #C0392B; }
+  .info-must ul { margin: 8px 0 0 18px; }
+  .info-must li { margin: 4px 0; }
+  .info-tips { background: var(--accent-bg); border-left: 3px solid var(--accent); color: #5C4A1F; }
+  .info-tips strong { color: var(--primary); }
+
+  /* ==== STOP ACTIONS ==== */
+  .stop-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; text-decoration: none; color: var(--text); font-size: 0.88rem; transition: all 0.2s; cursor: pointer; font-family: inherit; }
+  .btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-1px); }
+
+  /* ==== IMAGE STRIP / SLIDER ==== */
+  .image-strip { display: flex; gap: 12px; margin: 16px -28px 16px; padding: 8px 28px 16px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+  .image-strip::-webkit-scrollbar { height: 6px; }
+  .image-strip::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  .img-card { flex: 0 0 200px; height: 130px; border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; text-decoration: none; color: white; scroll-snap-align: start; transition: transform 0.2s; display: flex; flex-direction: column; justify-content: flex-end; padding: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.10); }
+  .img-card:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+  .img-card.food { background: var(--grad-food); }
+  .img-card.pottery { background: var(--grad-pottery); }
+  .img-card.shrine { background: var(--grad-shrine); }
+  .img-card.nature { background: var(--grad-nature); }
+  .img-card.sea { background: var(--grad-sea); }
+  .img-card.night { background: var(--grad-night); }
+  .img-card-emoji { font-size: 2.4rem; position: absolute; top: 14px; right: 14px; opacity: 0.8; }
+  .img-card-label { font-size: 0.95rem; font-weight: 700; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+  .img-card-sub { font-size: 0.72rem; opacity: 0.85; margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ==== TRANSPORT ==== */
+  .transport { display: flex; align-items: center; gap: 12px; padding: 14px 22px; margin: 0 0 24px 40px; color: var(--text-muted); font-size: 0.92rem; background: #F0F4F8; border-radius: 8px; border-left: 3px solid #6B9BD1; }
+  .transport-icon { flex-shrink: 0; color: #6B9BD1; font-size: 1.2rem; }
+  .transport strong { color: #2E4A7A; }
+
+  /* ==== POTTERY EDUCATION ==== */
+  .edu-section { background: linear-gradient(135deg, #F8F4F0 0%, #FFFCF5 100%); border: 1px solid var(--accent); border-radius: 14px; padding: 28px; margin: 32px 0; }
+  .edu-section h3 { color: var(--primary); margin-bottom: 16px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px; }
+  .edu-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+  .edu-table th, .edu-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; }
+  .edu-table th { background: var(--accent); color: white; font-weight: 600; }
+  .edu-table td:first-child { font-weight: 700; color: var(--primary); white-space: nowrap; }
+  .edu-table tr:nth-child(even) td { background: rgba(255,255,255,0.7); }
+
+  /* ==== PLAN SWITCHER ==== */
+  .plan-switcher { display: flex; gap: 0; margin: 32px 0 24px; border: 2px solid var(--primary); border-radius: 10px; overflow: hidden; background: white; }
+  .plan-btn { flex: 1; padding: 16px 20px; border: none; background: white; cursor: pointer; font-size: 0.95rem; color: var(--text-muted); font-family: inherit; transition: all 0.2s; text-align: center; font-weight: 500; border-right: 1px solid var(--primary); }
+  .plan-btn:last-child { border-right: none; }
+  .plan-btn:hover { background: var(--primary-light); color: var(--primary); }
+  .plan-btn.active { background: var(--primary); color: white; font-weight: 700; }
+  .plan-btn-tag { display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; opacity: 0.7; }
+  .plan-btn.active .plan-btn-tag { opacity: 1; }
+  .plan-content { display: none; }
+  .plan-content.active { display: block; animation: fadeIn 0.4s ease; }
+
+  /* ==== RESERVATIONS ==== */
+  .reservations { background: linear-gradient(135deg, #FFF5F5 0%, #FEEAEA 100%); border: 1px solid #F5C6CB; border-radius: 12px; padding: 28px; margin: 40px 0 24px; }
+  .reservations h3 { color: var(--primary); margin-bottom: 16px; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; }
+  .reservations-list { list-style: none; }
+  .reservations-list li { padding: 10px 0; border-bottom: 1px dashed rgba(188, 0, 45, 0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .reservations-list li:last-child { border-bottom: none; }
+  .reservations-list strong { color: var(--text); }
+  .reservations-list em { color: var(--primary); font-style: normal; font-size: 0.85rem; background: white; padding: 2px 10px; border-radius: 12px; }
+
+  /* ==== HOTEL SECTION ==== */
+  .hotel-intro { background: linear-gradient(135deg, #F0F4F8 0%, #FFFFFF 100%); border-radius: 12px; padding: 28px; margin: 0 0 32px; border: 1px solid var(--border); }
+  .hotel-tier { margin-bottom: 40px; }
+  .hotel-tier-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--accent); }
+  .hotel-tier-name { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+  .hotel-tier-price { color: var(--accent); font-weight: 600; font-size: 0.95rem; padding: 4px 12px; background: var(--accent-bg); border-radius: 12px; }
+  .hotel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+  .hotel-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; box-shadow: var(--shadow); transition: all 0.2s; }
+  .hotel-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .hotel-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; color: var(--primary); }
+  .hotel-name-jp { font-family: 'Noto Serif JP', serif; font-size: 0.85rem; color: var(--text-light); margin-bottom: 12px; }
+  .hotel-stars { color: var(--accent); font-size: 0.85rem; margin-bottom: 10px; }
+  .hotel-features { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+  .hotel-features strong { color: var(--text); }
+  .hotel-rooms { background: var(--bg); padding: 10px 14px; border-radius: 6px; font-size: 0.85rem; margin: 12px 0; }
+  .hotel-rooms div { margin: 3px 0; }
+  .hotel-rooms strong { color: var(--primary); }
+  .hotel-price { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin: 10px 0; }
+  .hotel-price small { font-weight: 400; color: var(--text-muted); font-size: 0.85rem; }
+  .hotel-tag { display: inline-block; padding: 3px 8px; background: var(--primary-light); color: var(--primary); font-size: 0.72rem; border-radius: 4px; margin: 2px 4px 2px 0; font-weight: 600; }
+  .hotel-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
+  /* ==== FOOTER ==== */
+  footer { background: #1A1A1A; color: #BBB; text-align: center; padding: 50px 20px 30px; margin-top: 60px; }
+  footer h3 { color: white; margin-bottom: 16px; font-weight: 700; letter-spacing: 2px; }
+  footer p { font-size: 0.9rem; line-height: 1.8; max-width: 700px; margin: 0 auto 12px; }
+  footer .signature { margin-top: 24px; font-size: 0.85rem; color: #777; }
+
+  /* ==== RESPONSIVE ==== */
+  @media (max-width: 640px) {
+    .hero { padding: 60px 20px 70px; }
+    .hero-meta { padding: 14px 20px; gap: 20px; }
+    .hero-meta-item strong { font-size: 1.1rem; }
+    main { padding: 40px 16px; }
+    .timeline { padding-left: 30px; }
+    .stop { padding: 20px; }
+    .stop::before { left: -27px; }
+    .transport { margin-left: 30px; padding: 12px 16px; font-size: 0.85rem; }
+    .day-map iframe { height: 280px; }
+    .nav-tab { padding: 14px 10px; min-width: 90px; font-size: 0.8rem; }
+    .image-strip { margin: 16px -20px 16px; padding: 8px 20px 16px; }
+    .img-card { flex: 0 0 170px; height: 110px; }
+    .edu-table { font-size: 0.8rem; }
+    .edu-table th, .edu-table td { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">FUKUOKA · KYUSHU · 2026</div>
+    <h1>福岡 5 日深度遊</h1>
+    <div class="hero-subtitle">瓷器朝聖 · 海鮮屋台 · 私房路線</div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">出發<strong>5/1 18:20</strong></div>
+      <div class="hero-meta-item">天數<strong>5 天 4 夜</strong></div>
+      <div class="hero-meta-item">返程<strong>5/5 12:20</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="warning">
+  <strong>⚠️ 黃金週警告</strong>　5/3-5/5 為日本國定連假「黃金週」，全日本最熱旅遊期：
+  <strong>JR 特急務必劃位</strong>、和牛/鰻魚/牛腸鍋餐廳須提前 2-4 週訂位、飯店價格可飆 1.5-2 倍。
+  <strong>5 月糸島牡蠣小屋已收</strong>（產季 10 月-3 月），改去濱燒白濱家或糸島海鮮堂。
+</div>
+
+<div class="nav-wrap">
+  <nav class="nav-tabs">
+    <a class="nav-tab active" data-target="day1" href="#day1"><span class="day-num">DAY 1</span>5/1 五 · 抵達</a>
+    <a class="nav-tab" data-target="day2" href="#day2"><span class="day-num">DAY 2</span>5/2 六 · 瓷器</a>
+    <a class="nav-tab" data-target="day3" href="#day3"><span class="day-num">DAY 3</span>5/3 日 · 二選一</a>
+    <a class="nav-tab" data-target="day4" href="#day4"><span class="day-num">DAY 4</span>5/4 一 · 糸島</a>
+    <a class="nav-tab" data-target="day5" href="#day5"><span class="day-num">DAY 5</span>5/5 二 · 返程</a>
+    <a class="nav-tab" data-target="hotels" href="#hotels"><span class="day-num">EXTRA</span>🏨 住宿建議</a>
+  </nav>
+</div>
+
+<main>
+
+<!-- ============== DAY 1 ============== -->
+<section id="day1" class="day-section active">
+  <div class="day-header">
+    <div class="day-meta"><span>DAY 01</span><span class="day-meta-tag">5/1 (五) · 抵達</span></div>
+    <h2 class="day-title">著陸 · 屋台之夜</h2>
+    <div class="day-title-jp">到着 · 中洲屋台</div>
+    <p class="day-summary">傍晚落地，沒時間跑遠。輕量化 Day 1：5 分鐘地鐵到博多市區、放下行李就直奔 <strong>中洲屋台街</strong>，喝燒酎、吃博多元祖炒拉麵、明太子玉子燒。把第一晚交給河畔的露天小攤。</p>
+  </div>
+
+  <div class="image-strip">
+    <a class="img-card night" href="https://www.google.com/search?q=中洲屋台街+夜&tbm=isch" target="_blank">
+      <span class="img-card-emoji">🏮</span>
+      <div class="img-card-sub">NAKASU YATAI</div>
+      <div class="img-card-label">中洲屋台街</div>
+    </a>
+    <a class="img-card food" href="https://www.google.com/search?q=小金ちゃん+焼きラーメン&tbm=isch" target="_blank">
+      <span class="img-card-emoji">🍜</span>
+      <div class="img-card-sub">YAKI-RAMEN</div>
+      <div class="img-card-label">小金ちゃん 炒拉麵</div>
+    </a>
+    <a class="img-card food" href="https://www.google.com/search?q=喜柳+屋台+福岡&tbm=isch" target="_blank">
+      <span class="img-card-emoji">🥟</span>
+      <div class="img-card-sub">KIRYU</div>
+      <div class="img-card-label">喜柳 糯糯餃子</div>
+    </a>
+    <a class="img-card night" href="https://www.google.com/search?q=megane+coffee+spirits+fukuoka&tbm=isch" target="_blank">
+      <span class="img-card-emoji">☕</span>
+      <div class="img-card-sub">DESIGN AWARD</div>
+      <div class="img-card-label">megane coffee</div>
+    </a>
+  </div>
+
+  <div class="day-map">
+    <iframe src="https://www.google.com/maps?q=中洲屋台街,福岡&hl=zh-TW&output=embed&z=15" loading="lazy" allowfullscreen></iframe>
+    <a class="day-map-cta" href="https://www.google.com/maps/dir/福岡空港駅/博多駅/中洲川端駅/中洲屋台街" target="_blank" rel="noopener">🗺️ 在 Google Maps 開啟今日完整路線</a>
+  </div>
+
+  <div class="timeline">
+
+    <div class="stop move">
+      <span class="stop-time">18:20</span><span class="stop-cat">抵達</span>
+      <h3 class="stop-name">福岡空港 国際線ターミナル</h3>
+      <div class="stop-jp-name">FUKUOKA AIRPORT INTERNATIONAL</div>
+      <p class="stop-desc">下機 → 入境審查 → 領行李，<strong>黃金週首日</strong>預估 18:50-19:10 出關。福岡空港的優勢是<em>全日本離市區最近的機場</em>——下飛機 30 分鐘可坐進屋台。</p>
+      <div class="info-block info-howto">
+        <strong>🚇 交通策略：</strong>國際線航廈須<strong>免費接駁巴士</strong>到地鐵駅（國內線航廈），約 10 分鐘 1 班次車程 5 分鐘。從地鐵福岡空港駅到博多駅 5 分鐘 ¥260。<br>
+        <strong>💳 票卡：</strong>下機在便利商店買實體 SUICA / hayakaken（福岡在地 IC）¥2,000 含 ¥500 押金。
+      </div>
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=福岡空港+国際線ターミナル" target="_blank">📍 國際線航廈</a>
+        <a class="btn" href="https://www.google.com/search?q=福岡空港+地鉄+接駁&tbm=isch" target="_blank">📷 圖片</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚇</span>
+      <span><strong>福岡空港駅 → 博多駅</strong>　地下鐵空港線 · 5 分鐘 · ¥260　<em>(下車即博多駅地下街，飯店都步行 3-10 分)</em></span>
+    </div>
+
+    <div class="stop">
+      <span class="stop-time">19:30</span><span class="stop-cat">入住</span>
+      <h3 class="stop-name">博多駅周邊飯店 Check-in</h3>
+      <div class="stop-jp-name">HOTEL CHECK-IN</div>
+      <p class="stop-desc">推薦住<strong>博多駅周邊</strong>，<em>所有日歸行程（有田、唐津、糸島）都從博多駅出發</em>，省下每天 30+ 分鐘通勤。詳細飯店比較請看 <a href="#hotels" class="btn" style="display: inline-flex; padding: 4px 10px; font-size: 0.85rem; margin-left: 4px;">🏨 住宿建議</a> tab。</p>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚶</span>
+      <span><strong>飯店 → 中洲屋台街</strong>　步行 12-15 分鐘（博多駅西側 → 那珂川河畔），或搭地鐵到「中洲川端駅」¥210</span>
+    </div>
+
+    <div class="stop eat">
+      <span class="stop-time">20:00</span><span class="stop-cat">⭐ 晚餐</span>
+      <h3 class="stop-name">中洲屋台街</h3>
+      <div class="stop-jp-name">中洲屋台（なかすやたい）</div>
+      <p class="stop-desc">那珂川河畔約 <strong>20+ 家屋台</strong>一字排開，傍晚 18:00 出攤、凌晨 1:00 收攤。福岡屋台的特殊文化是<em>客人坐長條凳、與隔壁鄰桌肩並肩</em>，老闆就在你眼前 2 公尺處煮東西。屋台小、流動性高，建議<strong>一晚跳 2-3 攤</strong>各嚐特色。</p>
+
+      <div class="info-block info-howto">
+        <strong>🎯 屋台潛規則：</strong><br>
+        ① <strong>每攤都有最低消費</strong>（約 ¥1,000-1,500/人），不要「只喝一杯」。<br>
+        ② <strong>逗留約 30-45 分鐘</strong>就讓位給後面排隊的人，這是禮儀。<br>
+        ③ 大多<strong>只收現金</strong>，準備 ¥10,000-15,000/人。<br>
+        ④ <strong>下雨天或冷天反而比較不擠</strong>，但攤少。<br>
+        ⑤ 18:00-19:00 抵達卡黃金時段。
+      </div>
+
+      <div class="info-block info-must">
+        <strong>🍴 必踩三攤：</strong>
+        <ul>
+          <li><strong>小金ちゃん</strong>（1968 年創立）— <em>炒拉麵發明元祖</em>。必點：焼きラーメン（炒拉麵 ¥800）、明太子玉子燒（¥800）、味噌燉牛筋（¥600）。配酒一流。</li>
+          <li><strong>喜柳（きりゅう）</strong>（渡辺通4丁目附近）— 約 100 種菜單，最強的是<em>糯糯餃子</em>（一口煎餃外皮 Q 彈）。</li>
+          <li><strong>megane coffee &amp; spirits</strong>— 拿過 Good Design Award 的<em>新世代屋台</em>，賣手沖咖啡 + 雞尾酒，氛圍最潮。</li>
+          <li>備案：<strong>武ちゃん</strong>（炭烤雞）、<strong>小島商店</strong>（一口煎餃 + 燒鳥）、<strong>Telas &amp; Mico</strong>（法式烤蝸牛 + 紅酒）。</li>
+        </ul>
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card food" href="https://www.google.com/search?q=焼きラーメン+小金ちゃん&tbm=isch" target="_blank"><span class="img-card-emoji">🍜</span><div class="img-card-sub">ELEMENT #1</div><div class="img-card-label">炒拉麵</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=明太子+玉子焼き&tbm=isch" target="_blank"><span class="img-card-emoji">🍳</span><div class="img-card-sub">ELEMENT #2</div><div class="img-card-label">明太子玉子燒</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=博多+一口餃子+屋台&tbm=isch" target="_blank"><span class="img-card-emoji">🥟</span><div class="img-card-sub">ELEMENT #3</div><div class="img-card-label">一口煎餃</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=博多+焼鳥+屋台&tbm=isch" target="_blank"><span class="img-card-emoji">🍢</span><div class="img-card-sub">ELEMENT #4</div><div class="img-card-label">炭烤燒鳥</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=博多+おでん+屋台&tbm=isch" target="_blank"><span class="img-card-emoji">🍲</span><div class="img-card-sub">ELEMENT #5</div><div class="img-card-label">關東煮</div></a>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>💡 黃金週特別提醒：</strong>5/1 雖然不是國定假日但已是黃金週前夕，週五晚上熱門攤可能要排 30-60 分鐘。建議「人少先進去吃，看到隊伍就先排隔壁」流動式攻略。
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=中洲屋台街" target="_blank">📍 屋台街</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=小金ちゃん+中洲" target="_blank">📍 小金ちゃん</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=megane+coffee+spirits+fukuoka" target="_blank">📍 megane coffee</a>
+      </div>
+    </div>
+
+    <div class="stop">
+      <span class="stop-time">22:30</span><span class="stop-cat">回飯店</span>
+      <h3 class="stop-name">回飯店 / 早睡</h3>
+      <p class="stop-desc">明天是行程最重的瓷器日，需 7:30 出發。<strong>晚上 11 點前睡</strong>，明早 6:30 起床精神才夠。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== DAY 2 ============== -->
+<section id="day2" class="day-section">
+  <div class="day-header">
+    <div class="day-meta"><span>DAY 02 · 重點日</span><span class="day-meta-tag">5/2 (六) · 瓷器</span></div>
+    <h2 class="day-title">瓷器朝聖 · 有田 + 伊萬里</h2>
+    <div class="day-title-jp">有田焼 · 鍋島焼の旅</div>
+    <p class="day-summary">這是整趟旅程的核心。從博多搭 JR 特急穿越佐賀，登上日本瓷器發源地 <strong>有田</strong>（400+ 年歷史）。<em>幸樂窯倉庫尋寶 ¥6,600 起</em>把家裡碗櫃補滿，<em>陶山神社</em>看全瓷鳥居，下午轉戰深山 <strong>大川內山秘窯之里</strong>。傍晚回博多吃<em>Tabelog 第一名</em>燒肉。</p>
+  </div>
+
+  <div class="image-strip">
+    <a class="img-card pottery" href="https://www.google.com/search?q=幸楽窯+トレジャーハンティング&tbm=isch" target="_blank"><span class="img-card-emoji">🏺</span><div class="img-card-sub">TREASURE HUNT</div><div class="img-card-label">幸樂窯尋寶</div></a>
+    <a class="img-card shrine" href="https://www.google.com/search?q=陶山神社+鳥居&tbm=isch" target="_blank"><span class="img-card-emoji">⛩️</span><div class="img-card-sub">PORCELAIN TORII</div><div class="img-card-label">陶山神社</div></a>
+    <a class="img-card pottery" href="https://www.google.com/search?q=大川内山+秘窯の里&tbm=isch" target="_blank"><span class="img-card-emoji">🎋</span><div class="img-card-sub">SECRET KILN</div><div class="img-card-label">大川內山</div></a>
+    <a class="img-card pottery" href="https://www.google.com/search?q=色鍋島+鍋島焼&tbm=isch" target="_blank"><span class="img-card-emoji">🎨</span><div class="img-card-sub">IRO-NABESHIMA</div><div class="img-card-label">色鍋島</div></a>
+    <a class="img-card food" href="https://www.google.com/search?q=焼肉すどう+春吉&tbm=isch" target="_blank"><span class="img-card-emoji">🥩</span><div class="img-card-sub">TABELOG #1</div><div class="img-card-label">燒肉すどう春吉</div></a>
+  </div>
+
+  <div class="day-map">
+    <iframe src="https://www.google.com/maps?q=有田駅,佐賀県&hl=zh-TW&output=embed&z=10" loading="lazy" allowfullscreen></iframe>
+    <a class="day-map-cta" href="https://www.google.com/maps/dir/博多駅/幸楽窯/陶山神社/伊万里駅/大川内山/博多駅" target="_blank" rel="noopener">🗺️ 在 Google Maps 開啟今日完整路線</a>
+  </div>
+
+  <!-- POTTERY EDU SECTION -->
+  <div class="edu-section">
+    <h3>📚 出發前必懂：日本四大瓷器</h3>
+    <p style="margin-bottom: 12px;">今天會看到的「<strong>有田燒、伊萬里燒、鍋島燒、唐津燒</strong>」之間的關係，搞懂之後逛窯元才會知道你在看什麼：</p>
+
+    <table class="edu-table">
+      <thead>
+        <tr><th>名稱</th><th>產地</th><th>特色</th><th>等級 / 價位</th><th>怎麼挑</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>有田燒<br><span style="font-weight:400; font-size: 0.78rem; color:#888;">ARITA-YAKI</span></td>
+          <td>佐賀有田町</td>
+          <td>輕薄白底、青花染付為主，後期加入歐式宮廷彩繪</td>
+          <td>日常 ¥800-3,000<br>名家 ¥10,000+</td>
+          <td>看「有田焼」標記、聽聲音清脆、白底要透</td>
+        </tr>
+        <tr>
+          <td>伊萬里燒<br><span style="font-weight:400; font-size: 0.78rem; color:#888;">IMARI-YAKI</span></td>
+          <td>佐賀伊萬里港<br>（古早是有田統稱）</td>
+          <td>古伊萬里風格濃豔，金赤花紋、宮廷感重</td>
+          <td>古董 ¥30,000+<br>新作 ¥3,000+</td>
+          <td>明治後分家，「古伊萬里」收藏級</td>
+        </tr>
+        <tr>
+          <td>鍋島燒<br><span style="font-weight:400; font-size: 0.78rem; color:#888;">NABESHIMA-YAKI</span></td>
+          <td>大川內山</td>
+          <td><strong>「藩窯」=御用窯</strong>，技術不外流，獻給將軍/天皇。<em>色鍋島</em>（青花+赤青綠彩）公認日本最精巧</td>
+          <td>頂級 ¥20,000+<br>觀光款 ¥2,000+</td>
+          <td>看是否有「鍋島藩窯」標記、紋樣對稱、底足標準化</td>
+        </tr>
+        <tr>
+          <td>唐津燒<br><span style="font-weight:400; font-size: 0.78rem; color:#888;">KARATSU-YAKI</span></td>
+          <td>佐賀唐津</td>
+          <td><strong>樸素粗獷</strong>，受朝鮮李朝影響，茶道愛用「一樂二萩三唐津」</td>
+          <td>名家茶碗 ¥50,000+<br>日常 ¥3,000+</td>
+          <td>看土感、釉藥不勻為佳、適合茶道用</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 16px; font-size: 0.92rem;">
+      <strong style="color: var(--primary);">🏆 人間國寶名家（看到一定要買 / 朝聖）：</strong><br>
+      ・<strong>14 代 酒井田柿右衛門</strong>（色繪瓷）— 有田燒巨匠<br>
+      ・<strong>14 代 今泉今右衛門</strong>（色鍋島）— 大川內山頂端<br>
+      ・<strong>井上萬二</strong>（白瓷）<br>
+      ・<strong>中島宏</strong>（青瓷）<br>
+      ・<strong>13/14 代 中里太郎右衛門</strong>（唐津燒）— 明天 Plan A 會路過
+    </p>
+  </div>
+
+  <div class="timeline">
+
+    <div class="stop move">
+      <span class="stop-time">07:00</span><span class="stop-cat">早餐</span>
+      <h3 class="stop-name">飯店早餐 / 博多駅 早場</h3>
+      <p class="stop-desc">早上要趕 8:01 班次。建議飯店附早餐。或在博多駅地下「<em>博多めん街道</em>」7:00 開的<strong>牧のうどん</strong>來碗烏龍麵。</p>
+    </div>
+
+    <div class="stop move">
+      <span class="stop-time">07:45</span><span class="stop-cat">⭐ 重要</span>
+      <h3 class="stop-name">博多駅 → 搭乘 JR 特急 みどり 1 號</h3>
+      <div class="stop-jp-name">JR Limited Express MIDORI</div>
+      <p class="stop-desc">JR 博多駅<strong>新幹線改札外</strong>的「みどりの窗口」買票，或自動售票機。<em>黃金週週六</em>強烈建議買<strong>指定席</strong>，自由席可能站 1.5 小時。</p>
+      <div class="info-block info-howto">
+        <strong>🎫 推薦：JR 北部九州周遊券 3 日 ¥9,000</strong><br>
+        涵蓋博多 ↔ 有田 ↔ 伊萬里 ↔ 唐津 ↔ 糸島來回，3 天剛好對應 Day 2/3/4。<br>
+        單買票 Day 2(¥6,000) + Day 3(¥2,500) + Day 4(¥1,200) = ¥9,700，省 ¥700+ 還能無限搭。
+      </div>
+      <div class="info-block info-tips">
+        <strong>⏰ 班次：</strong>みどり 1 号 8:01 博多発 → 9:18 有田着（JR 九州時刻表為準）。
+      </div>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚄</span>
+      <span><strong>博多駅 → 有田駅</strong>　JR 特急みどり · 1h17m · 自由席 ¥3,080 / 指定席 ¥3,610</span>
+    </div>
+
+    <div class="stop experience">
+      <span class="stop-time">10:00</span><span class="stop-cat">⭐ 重點 ⭐</span>
+      <h3 class="stop-name">幸樂窯 · 倉庫尋寶</h3>
+      <div class="stop-jp-name">幸楽窯（こうらくがま）· トレジャーハンティング</div>
+      <p class="stop-desc">創立於 <strong>1865 年</strong>的老窯，倉庫裡<em>堆了超過 10 萬件</em>新舊有田燒——從現役款、絕版品、到職人自己都忘了的 vintage 全部都有。拿一個籃子 + 手套，<strong>90 分鐘</strong>內隨便挑，只要不超出籃子上緣就 ALL YOU CAN GET。</p>
+
+      <div class="info-block info-howto">
+        <strong>📋 流程細節：</strong><br>
+        ① <strong>不需預約</strong>（walk-in 可），但黃金週建議 09:30 抵達卡位。<br>
+        ② 兩種 course 二選一：<br>
+        　・<strong>¥6,600（含稅）</strong>—標準籃，~30-50 件容量<br>
+        　・<strong>¥13,200（含稅）</strong>—大籃，~70-100 件容量、且可選頂級畫付倉庫<br>
+        ③ 給籃子 + 手套 → 進倉庫 → <strong>90 分鐘計時</strong> → 結帳打包。<br>
+        ④ 兩個倉庫各有特色：<strong>1 號倉庫</strong>素白簡約款（適合日常用）；<strong>2 號倉庫</strong>畫付彩繪款（適合送禮）。
+      </div>
+
+      <div class="info-block info-must">
+        <strong>🎯 挑選攻略（現場別茫然）：</strong>
+        <ul>
+          <li><strong>先繞一圈再開挑</strong>——10 萬件中先掃描，記下喜歡的區域再回來細挑</li>
+          <li><strong>看底款</strong>：「有田焼」「香蘭社」「深川製磁」「香山窯」這些印章是<em>正規品</em></li>
+          <li><strong>聲音測試</strong>：用指甲輕敲，<em>清脆</em>聲為佳，悶聲是裂痕</li>
+          <li><strong>體積最大化</strong>：先放<em>大盤大碗</em>墊底，再用小器物填縫</li>
+          <li><strong>套裝優先</strong>：找成對的茶杯/小皿，不要全是單品</li>
+          <li><strong>檢查瑕疵</strong>：B 級品有小坑/釉藥流痕，但功能無損可挑</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>📦 寄送：</strong>挑完<strong>店家可代寄到台灣</strong>（運費 ¥3,000-8,000 視重量），不用扛回飯店。<br>
+        <strong>📞 聯絡：</strong>0955-42-4121 / kouraku.jp@gmail.com<br>
+        <strong>🚖 從有田駅</strong>計程車 5 分鐘 ¥1,200，或步行 25 分鐘
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card pottery" href="https://www.google.com/search?q=幸楽窯+倉庫&tbm=isch" target="_blank"><span class="img-card-emoji">🏭</span><div class="img-card-sub">WAREHOUSE</div><div class="img-card-label">尋寶倉庫實況</div></a>
+        <a class="img-card pottery" href="https://www.google.com/search?q=有田焼+染付&tbm=isch" target="_blank"><span class="img-card-emoji">🍵</span><div class="img-card-sub">SOMETSUKE</div><div class="img-card-label">青花染付</div></a>
+        <a class="img-card pottery" href="https://www.google.com/search?q=有田焼+カラフル&tbm=isch" target="_blank"><span class="img-card-emoji">🌸</span><div class="img-card-sub">COLORFUL</div><div class="img-card-label">彩繪畫付</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=幸楽窯+有田" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://kouraku.jp.net/experience/hunting/" target="_blank">🌐 官網</a>
+        <a class="btn" href="https://www.google.com/search?q=幸楽窯+トレジャーハンティング+体験&tbm=isch" target="_blank">📷 圖片</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚖</span>
+      <span><strong>幸樂窯 → 陶山神社</strong>　計程車 ¥800 / 步行 15 分鐘（穿越有田老街，沿路逛窯元 OK）</span>
+    </div>
+
+    <div class="stop experience">
+      <span class="stop-time">12:00</span><span class="stop-cat">必訪</span>
+      <h3 class="stop-name">陶山神社 · 全瓷神社</h3>
+      <div class="stop-jp-name">陶山神社（すえやま じんじゃ）</div>
+      <p class="stop-desc">建於 <strong>1658 年</strong>，供奉<em>李參平</em>（朝鮮陶工，有田燒之父）。<strong>全日本獨一無二</strong>——鳥居、燈籠、狛犬全是有田燒，連繪馬、御朱印帳封面都是瓷做的。</p>
+
+      <div class="info-block info-must">
+        <strong>📸 必看 / 必拍 5 點：</strong>
+        <ul>
+          <li><strong>瓷鳥居</strong>（明治 21 年）— 高 3.7m 寬 3.9m，白磁青花唐草紋。<em>仔細看柱子有裂痕，是 1956 年颱風吹散後 1960 修復的痕跡</em>，國登錄文化財。</li>
+          <li><strong>瓷狛犬</strong> — 一般神社是石獅，這裡是<em>有田燒瓷獅</em>。</li>
+          <li><strong>火車穿越鳥居</strong> — JR 佐世保線軌道<em>就在神社正前方</em>，運氣好可拍到火車穿過鳥居畫面。日本「珍百景」。</li>
+          <li><strong>瓷玉垣</strong>（南北兩側 6.2m）— 表面細緻青花蔓草紋，町指定文化財。</li>
+          <li><strong>御朱印帳 ¥2,000</strong>—封面是真的瓷片做的，超有紀念意義。</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⏰ 停留：</strong>30 分鐘（純看景）/ 1 小時（含拍火車穿越）。社務所 9:00-17:00。<br>
+        <strong>💡 私房：</strong>神社後方有<em>古窯遺跡與大樹</em>，幾乎沒觀光客。
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card shrine" href="https://www.google.com/search?q=陶山神社+鳥居&tbm=isch" target="_blank"><span class="img-card-emoji">⛩️</span><div class="img-card-sub">TORII</div><div class="img-card-label">瓷鳥居</div></a>
+        <a class="img-card shrine" href="https://www.google.com/search?q=陶山神社+狛犬&tbm=isch" target="_blank"><span class="img-card-emoji">🐺</span><div class="img-card-sub">KOMAINU</div><div class="img-card-label">瓷狛犬</div></a>
+        <a class="img-card shrine" href="https://www.google.com/search?q=陶山神社+電車&tbm=isch" target="_blank"><span class="img-card-emoji">🚆</span><div class="img-card-sub">TRAIN CROSS</div><div class="img-card-label">火車穿鳥居</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=陶山神社+有田" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://arita-toso.net/" target="_blank">🌐 官網</a>
+      </div>
+    </div>
+
+    <div class="stop eat">
+      <span class="stop-time">12:45</span><span class="stop-cat">午餐</span>
+      <h3 class="stop-name">Gallery 有田 · 自選杯子咖啡廳</h3>
+      <div class="stop-jp-name">ギャラリー有田</div>
+      <p class="stop-desc">有田<strong>必訪咖啡廳</strong>——店內擺<em>2,000+ 個有田燒杯子</em>，可自由選一個喝咖啡。也供應<strong>有田燒咖哩飯</strong>（招牌，¥1,500）和伊萬里牛料理（¥2,500-4,000）。也是 Gallery 兼販售區。</p>
+      <div class="info-block info-must">
+        <strong>必點：</strong>
+        <ul>
+          <li><strong>有田燒咖哩</strong>（¥1,500）— 自選的有田燒大缽盛裝，咖哩濃郁</li>
+          <li><strong>伊萬里牛漢堡排</strong>（¥2,800）— 佐賀和牛血脈</li>
+          <li><strong>九州野菜套餐</strong>（¥1,800）— 季節限定</li>
+        </ul>
+      </div>
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=ギャラリー有田" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://www.google.com/search?q=ギャラリー有田+カレー&tbm=isch" target="_blank">📷 圖片</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚂</span>
+      <span><strong>有田駅 → 伊萬里駅</strong>　松浦鐵道 · 25 分鐘 · ¥460　<em>（單線小火車，沿途田園風光）</em></span>
+    </div>
+    <div class="transport">
+      <span class="transport-icon">🚌</span>
+      <span><strong>伊萬里駅 → 大川內山</strong>　西肥巴士 · 12 分鐘 · ¥160（1-2 班/小時）</span>
+    </div>
+
+    <div class="stop experience">
+      <span class="stop-time">14:30</span><span class="stop-cat">⭐ 重點 ⭐</span>
+      <h3 class="stop-name">大川內山 · 秘窯之里</h3>
+      <div class="stop-jp-name">大川内山（おおかわちやま）· 秘窯の里</div>
+      <p class="stop-desc">江戶時代的<strong>「鍋島藩御用窯」秘境</strong>——藩主把最頂尖的職人鎖在這個 V 字形山谷裡，<em>技術不外流</em>，專為將軍/天皇做獻品。1675-1871 年間 200 年只給藩主用。<strong>2003 年指定為國家史蹟</strong>。現存 31 間窯元散佈山中，紅磚煙囪 + 青苔石階 + 山泉聲，是有田觀光客打不到的私房景點。</p>
+
+      <div class="info-block info-howto">
+        <strong>⏱️ 停留時間建議：</strong><br>
+        ・<strong>2 小時</strong>—走完一圈、看登窯遺跡、めおとしの塔風鈴塔、隨意逛 5-8 家窯元<br>
+        ・<strong>4-5 小時</strong>—半日深度，逛遍 31 家、茶室小憩、+ 體驗<br>
+        ・<strong>+ 60-90 分鐘</strong>—彩繪 / 拉坯體驗（鍋島燒工業館 ¥800-2,000）<br>
+        <em>你的行程是 14:30-17:00 = 2.5 小時，剛好「散策 + 短體驗」</em>
+      </div>
+
+      <div class="info-block info-must">
+        <strong>🎯 必逛景點 + 必看 5 家窯元：</strong>
+        <ul>
+          <li><strong>めおとしの塔</strong>（夫婦獅子塔）— <em>14 個瓷風鈴</em>，被選為「日本音風景百選」，5 月有風時最動聽</li>
+          <li><strong>鍋島藩窯橋 + 關所跡</strong>—入山處的彩繪石橋，藩窯時代真有關卡守衛</li>
+          <li><strong>登窯跡</strong>—保留江戶時代多級柴燒登窯遺址</li>
+          <li><strong>陶工之家</strong>—重現江戶陶工生活樣貌</li>
+          <li><strong>伊萬里鍋島燒工業館</strong>（中央公會堂）— 有<em>體驗 ¥800-2,000</em>，亦可看資料館</li>
+          <li>名家窯元：<strong>畑萬陶苑</strong>（色鍋島大家）、<strong>鍋島虎仙窯</strong>（青瓷大家，現代設計）、<strong>李荘窯</strong>（傳統高品質）、<strong>金龍窯</strong>（茶具）</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>💡 怎麼挑鍋島燒：</strong><br>
+        ・看是否有<em>「鍋島藩窯」</em>標記（正規品）<br>
+        ・<strong>色鍋島</strong>=赤青綠彩繪，最精巧、最貴<br>
+        ・<strong>鍋島藍釉（瑠璃釉）</strong>=深藍底色，特色款<br>
+        ・<strong>鍋島青瓷</strong>=青翠色，器皿等級高<br>
+        ・小盤從 ¥3,000，名家茶碗 ¥30,000+
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card pottery" href="https://www.google.com/search?q=大川内山+秘窯&tbm=isch" target="_blank"><span class="img-card-emoji">🏘️</span><div class="img-card-sub">VILLAGE</div><div class="img-card-label">秘窯之里</div></a>
+        <a class="img-card shrine" href="https://www.google.com/search?q=大川内山+めおとしの塔+風鈴&tbm=isch" target="_blank"><span class="img-card-emoji">🎐</span><div class="img-card-sub">WIND CHIMES</div><div class="img-card-label">風鈴塔</div></a>
+        <a class="img-card pottery" href="https://www.google.com/search?q=色鍋島+畑萬陶苑&tbm=isch" target="_blank"><span class="img-card-emoji">🎨</span><div class="img-card-sub">IRO-NABESHIMA</div><div class="img-card-label">色鍋島名作</div></a>
+        <a class="img-card pottery" href="https://www.google.com/search?q=鍋島藩窯橋&tbm=isch" target="_blank"><span class="img-card-emoji">🌉</span><div class="img-card-sub">BRIDGE</div><div class="img-card-label">藩窯橋</div></a>
+        <a class="img-card pottery" href="https://www.google.com/search?q=鍋島青磁&tbm=isch" target="_blank"><span class="img-card-emoji">💚</span><div class="img-card-sub">CELADON</div><div class="img-card-label">鍋島青瓷</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=大川内山+秘窯の里" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://imari-ookawachiyama.com/" target="_blank">🌐 官網</a>
+        <a class="btn" href="https://www.google.com/search?q=大川内山+秘窯の里&tbm=isch" target="_blank">📷 圖片</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚌</span>
+      <span><strong>大川內山 → 伊萬里駅</strong>　西肥巴士 · 12 分鐘 · ¥160</span>
+    </div>
+    <div class="transport">
+      <span class="transport-icon">🚄</span>
+      <span><strong>伊萬里駅 → 博多駅</strong>　松浦鐵道 → 有田駅 → JR 特急　約 2 小時 · ¥3,500</span>
+    </div>
+
+    <div class="stop eat">
+      <span class="stop-time">19:30</span><span class="stop-cat">⭐ 晚餐 ⭐</span>
+      <h3 class="stop-name">焼肉すどう春吉 · Tabelog 福岡燒肉第一</h3>
+      <div class="stop-jp-name">焼肉すどう 春吉</div>
+      <p class="stop-desc">前身 2013 年熊本創業、2016 年來福岡，目前<strong>Tabelog 福岡燒肉類別第一名</strong>。最大特色是有專門的「<em>焼師</em>（grilling masters）」站在客人桌邊<strong>幫你烤肉</strong>，每片肉精準到秒控制熟度，是燒肉服務的天花板。九州產<em>雌牛和牛</em>主打。</p>
+
+      <div class="info-block info-must">
+        <strong>🥩 套餐選擇（兩種，差在肉質）：</strong>
+        <ul>
+          <li><strong>標準コース ¥10,000</strong>—包含 8-10 種部位，含シャトーブリアン薄片、ハネシタ、ザブトン</li>
+          <li><strong>プレミアムコース ¥15,000</strong>—升級稀少部位、頂級脂雌牛、生雲丹和牛刺身</li>
+          <li><strong>必點單品</strong>：シャトーブリアン（菲力心，¥4,500）、極上塩タン（鹽味牛舌，¥2,800）、特選和牛壽司（¥2,500/2 貫）</li>
+          <li>整間店<strong>只有 20 個位子</strong>，純包廂式</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⚠️ 訂位：</strong>黃金週週六晚上是<em>地獄級難訂</em>，務必提前 <strong>2-4 週</strong>。電話 092-287-8015 或 TableCheck 線上訂。<br>
+        <strong>⏰ 營業：</strong>17:00-24:00 全年無休<br>
+        <strong>📍 地址：</strong>福岡市中央區春吉 3-11-19 パノラマスクエア博多 1F
+      </div>
+
+      <div class="info-block info-howto">
+        <strong>🆘 訂不到的備案：</strong>
+        <ul>
+          <li><strong>薬院燒肉 NIKUICHI</strong>—超高 CP 日本和牛，部位多，套餐 ¥6,000-10,000</li>
+          <li><strong>HACHI HACHI 博多本店</strong>—平價 ¥500 起，牛舌 3 種厚度</li>
+          <li><strong>燒肉 ジャンボ</strong>—福岡老牌，肉質扎實</li>
+        </ul>
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card food" href="https://www.google.com/search?q=焼肉すどう+春吉&tbm=isch" target="_blank"><span class="img-card-emoji">🥩</span><div class="img-card-sub">YAKINIKU</div><div class="img-card-label">和牛盤</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=シャトーブリアン+和牛&tbm=isch" target="_blank"><span class="img-card-emoji">🔥</span><div class="img-card-sub">CHATEAUBRIAND</div><div class="img-card-label">菲力心</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=焼師+焼肉&tbm=isch" target="_blank"><span class="img-card-emoji">👨‍🍳</span><div class="img-card-sub">GRILL MASTER</div><div class="img-card-label">焼師服務</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=焼肉すどう春吉" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://yakinikusudo.com/" target="_blank">🌐 官網</a>
+        <a class="btn" href="https://www.tablecheck.com/en/shops/yakinikusudo-haruyoshi/reserve" target="_blank">🍽️ 訂位</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="reservations">
+    <h3>📞 Day 2 必訂事項</h3>
+    <ul class="reservations-list">
+      <li><strong>JR 特急みどり 1 号 指定席</strong> 8:01 博多→有田 <em>提前訂</em></li>
+      <li><strong>幸樂窯倉庫尋寶</strong> 10:00 直接 walk-in <em>不需預約</em></li>
+      <li><strong>焼肉すどう春吉</strong> 19:30-20:00 <em>提前 2-4 週</em></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============== DAY 3 ============== -->
+<section id="day3" class="day-section">
+  <div class="day-header">
+    <div class="day-meta"><span>DAY 03</span><span class="day-meta-tag">5/3 (日) · 二選一</span></div>
+    <h2 class="day-title">擇一方案：海鮮陶藝 or 神社遊船</h2>
+    <div class="day-title-jp">プラン A · プラン B</div>
+    <p class="day-summary">兩個方案各有特色。<strong>Plan A</strong> 玩海鮮+陶藝（早起密集，吃透明花枝）；<strong>Plan B</strong> 玩神社+遊船+鰻魚飯（輕鬆順暢，西鐵套票一票到底）。</p>
+  </div>
+
+  <div class="plan-switcher">
+    <button class="plan-btn active" data-plan="A"><span class="plan-btn-tag">PLAN A · 海鮮陶藝</span>唐津 + 呼子</button>
+    <button class="plan-btn" data-plan="B"><span class="plan-btn-tag">PLAN B · 輕鬆順暢</span>太宰府 + 柳川</button>
+  </div>
+
+  <!-- ===== PLAN A ===== -->
+  <div class="plan-content active" data-plan="A">
+
+  <div class="image-strip">
+    <a class="img-card sea" href="https://www.google.com/search?q=呼子朝市&tbm=isch" target="_blank"><span class="img-card-emoji">🐟</span><div class="img-card-sub">MORNING MARKET</div><div class="img-card-label">呼子朝市</div></a>
+    <a class="img-card sea" href="https://www.google.com/search?q=河太郎+呼子+イカ活造り&tbm=isch" target="_blank"><span class="img-card-emoji">🦑</span><div class="img-card-sub">LIVE SQUID</div><div class="img-card-label">透明花枝</div></a>
+    <a class="img-card shrine" href="https://www.google.com/search?q=唐津城&tbm=isch" target="_blank"><span class="img-card-emoji">🏯</span><div class="img-card-sub">CASTLE</div><div class="img-card-label">唐津城</div></a>
+    <a class="img-card pottery" href="https://www.google.com/search?q=唐津焼+中里太郎右衛門&tbm=isch" target="_blank"><span class="img-card-emoji">🍵</span><div class="img-card-sub">KARATSU-YAKI</div><div class="img-card-label">唐津燒</div></a>
+    <a class="img-card food" href="https://www.google.com/search?q=もつ鍋+大山&tbm=isch" target="_blank"><span class="img-card-emoji">🍲</span><div class="img-card-sub">MOTSUNABE</div><div class="img-card-label">大山牛腸鍋</div></a>
+  </div>
+
+  <div class="day-map">
+    <iframe src="https://www.google.com/maps?q=呼子朝市,唐津&hl=zh-TW&output=embed&z=11" loading="lazy" allowfullscreen></iframe>
+    <a class="day-map-cta" href="https://www.google.com/maps/dir/博多駅/呼子朝市/河太郎+呼子本店/唐津城/中里太郎右衛門陶房/博多駅" target="_blank" rel="noopener">🗺️ 在 Google Maps 開啟今日完整路線</a>
+  </div>
+
+  <div class="timeline">
+
+    <div class="stop move">
+      <span class="stop-time">06:30</span><span class="stop-cat">早起</span>
+      <h3 class="stop-name">早起出發</h3>
+      <p class="stop-desc">呼子朝市 7:30 開市、11:30 收，必須早起搶頭班 JR。便利商店買 Onigiri + 咖啡上車吃。</p>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚆</span>
+      <span><strong>博多駅 → 唐津駅</strong>　JR 筑肥線（地鐵直通空港線）· 1h20m · ¥1,160 　<em>建議買「福岡市内 + 唐津 1 日 Pass ¥1,720」可無限搭</em></span>
+    </div>
+    <div class="transport">
+      <span class="transport-icon">🚌</span>
+      <span><strong>唐津駅 → 呼子バスセンター</strong>　昭和巴士 · 30 分鐘 · ¥760（1 班/30 分）</span>
+    </div>
+
+    <div class="stop experience">
+      <span class="stop-time">09:30</span><span class="stop-cat">⭐ 朝市 ⭐</span>
+      <h3 class="stop-name">呼子朝市 · 日本三大朝市</h3>
+      <div class="stop-jp-name">呼子朝市（よぶこ あさいち）</div>
+      <p class="stop-desc">與輪島、高山並列<strong>日本三大朝市</strong>。100+ 年歷史，約 50 攤一字排在<em>呼子港邊小街</em>，賣早晨剛上岸的活魷魚、海帶、乾貨、熱呼呼烤花枝。<strong>邊走邊吃才對味</strong>。</p>
+
+      <div class="info-block info-must">
+        <strong>🦑 必嚐 / 必買：</strong>
+        <ul>
+          <li><strong>烤花枝串</strong>（¥500）— 朝市攤 No.1 必買，香脆有彈性</li>
+          <li><strong>魷魚乾（イカの一夜干し）</strong>（¥1,000-2,000）— 呼子名物，烤過一夜的半乾魷魚</li>
+          <li><strong>活鯛魚（朝獲り鯛）</strong>—老闆會現場處理，可寄宅配</li>
+          <li><strong>佐賀海苔</strong>— 玄界灘特產</li>
+          <li><strong>梅干乾</strong>— 自家製鹹度剛好</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>💡 文化潛規則：</strong>阿婆們會用佐賀腔大喊「<em>食べてみて！</em>（吃看看）」，<strong>試吃文化超開放</strong>，不買也沒關係但記得<em>說「ありがとう」</em>。<br>
+        <strong>📦 寄送：</strong>大件海鮮可請店家宅配到飯店（¥1,500-3,000）。
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card sea" href="https://www.google.com/search?q=呼子朝市+焼きイカ&tbm=isch" target="_blank"><span class="img-card-emoji">🔥</span><div class="img-card-sub">GRILLED SQUID</div><div class="img-card-label">烤花枝串</div></a>
+        <a class="img-card sea" href="https://www.google.com/search?q=呼子+一夜干し+イカ&tbm=isch" target="_blank"><span class="img-card-emoji">🌙</span><div class="img-card-sub">DRIED SQUID</div><div class="img-card-label">魷魚乾</div></a>
+        <a class="img-card sea" href="https://www.google.com/search?q=呼子朝市+おばあちゃん&tbm=isch" target="_blank"><span class="img-card-emoji">👵</span><div class="img-card-sub">VENDORS</div><div class="img-card-label">朝市阿婆</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=呼子朝市" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://www.google.com/search?q=呼子朝市&tbm=isch" target="_blank">📷 圖片</a>
+      </div>
+    </div>
+
+    <div class="stop eat">
+      <span class="stop-time">11:00</span><span class="stop-cat">⭐ 必吃 ⭐</span>
+      <h3 class="stop-name">河太郎 呼子本店 · 透明花枝刺身發源地</h3>
+      <div class="stop-jp-name">河太郎（かわたろう）呼子店</div>
+      <p class="stop-desc"><strong>60+ 年老店</strong>，是日本「<em>烏賊活造（イカ活造り）</em>」的<strong>發源地</strong>。店內水族箱<em>現撈活花枝</em>，5 分鐘內處理切片上桌——<strong>透明到看得見後面的盤紋</strong>，刺身切片時<em>還會輕微抽動</em>，肉質彈到牙齒會 Q 一下。觸鬚會做成天婦羅二吃。</p>
+
+      <div class="info-block info-must">
+        <strong>🦑 套餐選擇（必選有花枝活造的）：</strong>
+        <ul>
+          <li><strong>イカ活造り定食</strong>（¥3,800）— 入門款：花枝刺身 + 二吃天婦羅 + 茶碗蒸 + 小菜 + 白飯 + 味噌湯 + 季節水果</li>
+          <li><strong>呼子定食</strong>（¥4,800）— 加碼：再加生魚片 4 種（鯛、鰤、鮪、海膽）</li>
+          <li><strong>河太郎定食</strong>（¥5,500）— 頂級：花枝活造 + 燒魚 + 燉物 + 茶碗蒸 + 海鮮飯</li>
+          <li><strong>單點：イカシュウマイ</strong>（花枝燒賣，¥780）— 河太郎的招牌副菜</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-howto">
+        <strong>🍴 二吃流程（重要）：</strong><br>
+        ① 上桌時花枝是<em>透明的活造刺身</em>，先吃這個（趁鮮）<br>
+        ② 吃完身體 → 把<strong>剩下的觸鬚、頭部</strong>拿給店員<br>
+        ③ 廚房改做成<strong>天婦羅</strong>或鹽燒，10 分鐘後再上桌<br>
+        ④ 第二趟料理是 free，不另計費
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⚠️ 排隊：</strong>黃金週週日 11:00-14:00 必排 <em>1.5-2 小時</em>。<br>
+        <strong>✅ 對策：</strong>① <strong>11:00 開門前 10:45 到取號碼牌</strong>。② 電話訂位 <em>0955-82-3208</em>（接受 1-2 天前預約）。③ 排隊期間可逛朝市/碼頭打發時間。<br>
+        <strong>📍 地址：</strong>佐賀縣唐津市呼子町呼子 1744-17
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card sea" href="https://www.google.com/search?q=河太郎+イカ活造り&tbm=isch" target="_blank"><span class="img-card-emoji">🦑</span><div class="img-card-sub">LIVE SQUID</div><div class="img-card-label">透明花枝刺身</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=イカ天ぷら+呼子&tbm=isch" target="_blank"><span class="img-card-emoji">🍤</span><div class="img-card-sub">TEMPURA</div><div class="img-card-label">花枝天婦羅二吃</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=イカシュウマイ&tbm=isch" target="_blank"><span class="img-card-emoji">🥟</span><div class="img-card-sub">SHUMAI</div><div class="img-card-label">花枝燒賣</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=河太郎+呼子本店" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://www.kawataro.jp/yobuko/menu.html" target="_blank">🌐 菜單</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚌</span>
+      <span><strong>呼子 → 唐津駅</strong>　昭和巴士 · 30 分鐘 · ¥760</span>
+    </div>
+
+    <div class="stop">
+      <span class="stop-time">13:30</span><span class="stop-cat">景點</span>
+      <h3 class="stop-name">唐津城 · 海濱城堡</h3>
+      <div class="stop-jp-name">唐津城（からつじょう）</div>
+      <p class="stop-desc">三面環海的「<strong>舞鶴城</strong>」（別名），1602 年建。從天守閣可俯瞰<em>玄界灘 + 虹之松原</em>（日本三大松原）+ 唐津灣。</p>
+      <div class="info-block info-tips">
+        <strong>⏰ 停留：</strong>30-45 分鐘（純看景）。天守閣門票 ¥500、9:00-17:00。<br>
+        <strong>💡 私房：</strong>城下「<em>舞鶴橋</em>」是攝影名點，櫻花季已過但松樹仍美。<br>
+        <strong>🚖 交通：</strong>唐津駅 → 唐津城 計程車 5 分鐘 ¥800 / 步行 20 分鐘
+      </div>
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=唐津城" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://www.google.com/search?q=唐津城&tbm=isch" target="_blank">📷 圖片</a>
+      </div>
+    </div>
+
+    <div class="stop experience">
+      <span class="stop-time">14:30</span><span class="stop-cat">⭐ 體驗 ⭐</span>
+      <h3 class="stop-name">唐津燒體驗 · 中里太郎右衛門陶房 / 唐津焼会館</h3>
+      <div class="stop-jp-name">中里太郎右衛門陶房 · 唐津焼会館</div>
+      <p class="stop-desc">唐津燒名門世家「中里太郎右衛門」<strong>傳承 14 代</strong>，是日本陶藝家族殿堂級存在。可參觀工房 + 美術館（門票 ¥500），看真正的職人在拉坯。</p>
+
+      <div class="info-block info-howto">
+        <strong>📋 兩種選擇：</strong><br>
+        <strong>A. 中里太郎右衛門陶房</strong>（中央城內 3-6-29）<br>
+        　・參觀 + 美術館 ¥500<br>
+        　・現場買名家茶碗 ¥30,000-200,000<br>
+        　・想<em>看職人拉坯</em>選這個<br><br>
+        <strong>B. 唐津焼会館</strong>（唐津駅旁，新興町 2881-1）<br>
+        　・<strong>體驗拉坯 ¥3,300</strong>（90 分鐘做一個茶碗）<br>
+        　・<strong>體驗彩繪 ¥1,650</strong>（45 分鐘畫素胚）<br>
+        　・做完<em>1 個月後寄送回國</em>（國際運費 ¥3,000-5,000）<br>
+        　・想<em>親手做</em>選這個
+      </div>
+
+      <div class="info-block info-must">
+        <strong>🎯 唐津燒怎麼挑：</strong>
+        <ul>
+          <li><strong>「一樂二萩三唐津」</strong>—茶道排名第三的名器，受朝鮮李朝影響</li>
+          <li><strong>看土感</strong>—唐津燒的特色是<em>土的粗糙感</em>，太精細反而不對</li>
+          <li><strong>釉藥不勻為佳</strong>—天然柴燒造成的「景色」是賣點</li>
+          <li><strong>名家：</strong>中里隆（次代）、中里太亀（13 代）、中里花子（女性陶藝家）</li>
+          <li><strong>進階：隆太窯</strong>—中里隆主理，風格更現代，山中田園小徑很美（從唐津駅打車 15 分鐘）</li>
+        </ul>
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card pottery" href="https://www.google.com/search?q=唐津焼+茶碗&tbm=isch" target="_blank"><span class="img-card-emoji">🍵</span><div class="img-card-sub">CHAWAN</div><div class="img-card-label">唐津燒茶碗</div></a>
+        <a class="img-card pottery" href="https://www.google.com/search?q=中里太郎右衛門&tbm=isch" target="_blank"><span class="img-card-emoji">👨‍🎨</span><div class="img-card-sub">14TH GEN</div><div class="img-card-label">中里太郎右衛門</div></a>
+        <a class="img-card pottery" href="https://www.google.com/search?q=唐津焼+体験+ろくろ&tbm=isch" target="_blank"><span class="img-card-emoji">⚒️</span><div class="img-card-sub">POTTERY EXP</div><div class="img-card-label">拉坯體驗</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=中里太郎右衛門陶房" target="_blank">📍 中里陶房</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=唐津焼会館" target="_blank">📍 唐津焼会館</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚆</span>
+      <span><strong>唐津駅 → 博多駅</strong>　JR 筑肥線 · 1h20m · ¥1,160</span>
+    </div>
+
+    <div class="stop eat">
+      <span class="stop-time">19:30</span><span class="stop-cat">⭐ 晚餐 ⭐</span>
+      <h3 class="stop-name">博多もつ鍋 大山 本店 · 牛腸鍋天花板</h3>
+      <div class="stop-jp-name">博多もつ鍋 大山 本店</div>
+      <p class="stop-desc">福岡縣<strong>銷售 No.1</strong>的牛腸鍋（もつ鍋）。堅持<em>100% 日本國產牛小腸</em>，每塊統一切成 10g 大小，<strong>Q 彈不會硬</strong>。湯底用九州味噌 + 西京味噌調製，濃厚不膩。</p>
+
+      <div class="info-block info-must">
+        <strong>🍲 必點 + 套餐：</strong>
+        <ul>
+          <li><strong>湯底</strong>三選一：<em>味噌（多人選，店推）</em>、醬油（清爽）、水炊風（雞湯，無蒜）</li>
+          <li><strong>大山套餐 ¥5,500/人</strong>（最划算）：博多牛腸鍋 + 蒸雞沙拉 + 熊本馬肉刺身 2 種 + 柔嫩牛腸冷盤 + 博多明太子 + 燉煮牛筋 + 隨餐小菜</li>
+          <li><strong>單點必加：</strong>
+            <ul style="margin-top:4px;">
+              <li>軟醋牛雜（單品人氣 No.1，¥800）</li>
+              <li>柚子胡椒（九州柚子+青唐辛子+岩鹽，¥350）</li>
+              <li>馬刺身「極上大トロ」（熊本牧場直送，¥2,500）</li>
+            </ul>
+          </li>
+          <li><strong>收尾：強棒麵（ちゃんぽん麺）</strong>—粗麵下鍋煮 2-3 分鐘吸湯精華，是當地人吃法</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⚠️ 訂位：</strong>黃金週週日晚必訂！<em>電話 092-262-8136</em> 或 Tabelog。<br>
+        <strong>📍 本店：</strong>博多區店屋町 7-28（深棕木質型格設計）<br>
+        <strong>🆘 訂不到：</strong>分店多，KITTE 博多店、福岡空港店、天神西通店都有。
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card food" href="https://www.google.com/search?q=博多もつ鍋大山+味噌&tbm=isch" target="_blank"><span class="img-card-emoji">🍲</span><div class="img-card-sub">MISO HOTPOT</div><div class="img-card-label">味噌牛腸鍋</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=酢もつ&tbm=isch" target="_blank"><span class="img-card-emoji">🥗</span><div class="img-card-sub">VINEGAR</div><div class="img-card-label">軟醋牛雜</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=ちゃんぽん麺+もつ鍋&tbm=isch" target="_blank"><span class="img-card-emoji">🍜</span><div class="img-card-sub">CHANPON</div><div class="img-card-label">強棒麵收尾</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=もつ鍋大山+本店" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://www.motu-ooyama.com/en/" target="_blank">🌐 官網</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="reservations">
+    <h3>📞 Day 3 (Plan A) 必訂事項</h3>
+    <ul class="reservations-list">
+      <li><strong>河太郎 呼子本店</strong> 11:00 午餐 <em>提前 1-2 天訂</em></li>
+      <li><strong>唐津燒會館體驗</strong>（如要拉坯） <em>提前 1-2 天</em></li>
+      <li><strong>大山牛腸鍋本店</strong> 19:30 晚餐 <em>提前訂位</em></li>
+    </ul>
+  </div>
+
+  </div><!-- /Plan A -->
+
+  <!-- ===== PLAN B ===== -->
+  <div class="plan-content" data-plan="B">
+
+  <div class="image-strip">
+    <a class="img-card shrine" href="https://www.google.com/search?q=太宰府天満宮&tbm=isch" target="_blank"><span class="img-card-emoji">⛩️</span><div class="img-card-sub">SHRINE</div><div class="img-card-label">太宰府天滿宮</div></a>
+    <a class="img-card food" href="https://www.google.com/search?q=梅ヶ枝餅+かさの家&tbm=isch" target="_blank"><span class="img-card-emoji">🥮</span><div class="img-card-sub">UMEGAEMOCHI</div><div class="img-card-label">梅枝餅</div></a>
+    <a class="img-card shrine" href="https://www.google.com/search?q=スターバックス+太宰府+隈研吾&tbm=isch" target="_blank"><span class="img-card-emoji">☕</span><div class="img-card-sub">KENGO KUMA</div><div class="img-card-label">隈研吾 Starbucks</div></a>
+    <a class="img-card nature" href="https://www.google.com/search?q=柳川川下り&tbm=isch" target="_blank"><span class="img-card-emoji">🛶</span><div class="img-card-sub">RIVER CRUISE</div><div class="img-card-label">柳川遊船</div></a>
+    <a class="img-card food" href="https://www.google.com/search?q=うなぎのせいろ蒸し+柳川&tbm=isch" target="_blank"><span class="img-card-emoji">🍱</span><div class="img-card-sub">UNAGI SEIRO</div><div class="img-card-label">鰻魚蒸籠飯</div></a>
+  </div>
+
+  <div class="day-map">
+    <iframe src="https://www.google.com/maps?q=太宰府天満宮&hl=zh-TW&output=embed&z=11" loading="lazy" allowfullscreen></iframe>
+    <a class="day-map-cta" href="https://www.google.com/maps/dir/西鉄福岡（天神）駅/太宰府天満宮/太宰府スターバックス/西鉄柳川駅/御花/柳川川下り/西鉄福岡（天神）駅" target="_blank" rel="noopener">🗺️ 在 Google Maps 開啟今日完整路線</a>
+  </div>
+
+  <div class="timeline">
+
+    <div class="stop"><span class="stop-time">08:30</span><span class="stop-cat">早餐</span><h3 class="stop-name">飯店早餐 / 博多駅</h3><p class="stop-desc">不用早起，輕鬆吃完早餐再出發。</p></div>
+
+    <div class="stop move">
+      <span class="stop-time">09:00</span><span class="stop-cat">⭐ 套票</span>
+      <h3 class="stop-name">買「太宰府柳川観光きっぷ」</h3>
+      <div class="stop-jp-name">太宰府・柳川観光きっぷ</div>
+      <p class="stop-desc">西鐵福岡（天神）駅票口購買，<strong>¥3,170</strong> 一票到底。</p>
+      <div class="info-block info-must">
+        <strong>票券內容：</strong>
+        <ul>
+          <li>西鐵福岡 ↔ 太宰府 ↔ 柳川 來回車票</li>
+          <li><strong>柳川遊船券</strong>（市價 ¥1,800）</li>
+          <li>柳川指定餐廳鰻魚飯 / 名物折扣券</li>
+          <li>太宰府特定店舖優惠</li>
+        </ul>
+      </div>
+      <div class="info-block info-tips"><strong>💰 划算度：</strong>單買 ¥5,200+，省 ¥2,000+，是黃金週最划算的選項。</div>
+    </div>
+
+    <div class="transport"><span class="transport-icon">🚆</span><span><strong>西鐵福岡（天神）→ 西鐵二日市 → 太宰府駅</strong>　約 30 分鐘（轉車 1 次）</span></div>
+
+    <div class="stop experience">
+      <span class="stop-time">09:45</span><span class="stop-cat">⭐ 必訪 ⭐</span>
+      <h3 class="stop-name">太宰府天滿宮</h3>
+      <div class="stop-jp-name">太宰府天満宮（だざいふ てんまんぐう）</div>
+      <p class="stop-desc">奉祀<strong>「學問之神」菅原道真</strong>，1100+ 年歷史，全日本天滿宮總本社之一。本殿因 124 年大修而搬到<strong>「假殿（仮殿）」</strong>——<em>藤本壯介設計</em>，屋頂長著一片<strong>真實的森林</strong>，是 2023 完工的<em>限時建築</em>，<strong>到 2026 才能看到</strong>。</p>
+
+      <div class="info-block info-must">
+        <strong>📸 必看 / 必拍：</strong>
+        <ul>
+          <li><strong>仮殿（假殿）</strong>—藤本壯介「漂浮森林屋頂」，全球建築朝聖點</li>
+          <li><strong>御本殿後方</strong>—超 200 種梅花樹（5 月已過花期但綠意盎然）</li>
+          <li><strong>飛梅（とびうめ）</strong>—據說會自己飛到太宰府的傳說梅樹</li>
+          <li><strong>心字池 + 太鼓橋</strong>—過 3 座橋分別代表過去/現在/未來</li>
+          <li><strong>御守 / 御朱印</strong>—學業御守 ¥800（送考生最佳）、御朱印 ¥500</li>
+          <li><strong>九州國立博物館</strong>—走山道 5 分鐘可達，是 4 大國立博物館之一（門票 ¥700）</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⏰ 停留：</strong>1.5-2 小時（含表參道）<br>
+        <strong>⚠️ 黃金週週日：</strong>人會多到擠不過去！建議 9:30 前抵達，<em>9:30-10:30 衝本殿和拍照</em>，10:30+ 觀光客大軍湧入時轉戰表參道。
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=太宰府天満宮" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://www.google.com/search?q=太宰府+仮殿+藤本壮介&tbm=isch" target="_blank">📷 仮殿圖</a>
+      </div>
+    </div>
+
+    <div class="stop eat">
+      <span class="stop-time">11:00</span><span class="stop-cat">⭐ 街吃 ⭐</span>
+      <h3 class="stop-name">表參道 · 梅枝餅 + 隈研吾 Starbucks</h3>
+      <div class="stop-jp-name">参道・梅ヶ枝餅・スターバックス太宰府</div>
+      <p class="stop-desc">天滿宮一出來就是 250m 表參道，兩側 100+ 家店。重點是<strong>梅枝餅</strong>和<strong>隈研吾設計 Starbucks</strong>。</p>
+
+      <div class="info-block info-must">
+        <strong>🥮 梅枝餅大比拼（兩家最有名）：</strong>
+        <ul>
+          <li><strong>かさの家</strong>（90+ 年老店）— 表參道梅枝餅 No.1，<em>外脆內 Q 紅豆餡飽滿</em>，¥150/個。內用座位區可坐下吃 + 喝抹茶。</li>
+          <li><strong>やす武</strong>—北海道紅豆 + 佐賀糯米，與かさの家味道差不多但較少觀光客，¥150/個。</li>
+          <li><strong>吃法</strong>：剛烤好的最好吃（中央排隊處最熱）；冷掉的可微波 30 秒回溫</li>
+          <li><strong>順帶買：博多通りもん</strong>（奶皇饅頭）— 太宰府也有專櫃</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-must">
+        <strong>☕ 隈研吾 Starbucks 太宰府天滿宮表參道店：</strong>
+        <ul>
+          <li><strong>2,000+ 根木材</strong>編織成的隧道狀店面（2011 完工）</li>
+          <li><strong>免費</strong>— 不點咖啡也能進去拍照（但有客人優先）</li>
+          <li>限定杯：<em>太宰府梅花設計杯</em>（¥1,500）</li>
+          <li><strong>建議</strong>：點一杯 Latte（¥450）坐下慢慢拍</li>
+        </ul>
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card food" href="https://www.google.com/search?q=梅ヶ枝餅+焼き立て&tbm=isch" target="_blank"><span class="img-card-emoji">🥮</span><div class="img-card-sub">FRESH BAKED</div><div class="img-card-label">現烤梅枝餅</div></a>
+        <a class="img-card shrine" href="https://www.google.com/search?q=スターバックス+太宰府+店内&tbm=isch" target="_blank"><span class="img-card-emoji">🌳</span><div class="img-card-sub">WOOD WEAVING</div><div class="img-card-label">木編建築</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=太宰府+表参道&tbm=isch" target="_blank"><span class="img-card-emoji">🏪</span><div class="img-card-sub">SANDO</div><div class="img-card-label">表參道</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=かさの家+太宰府" target="_blank">📍 かさの家</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=スターバックス+太宰府天満宮表参道店" target="_blank">📍 隈研吾 Starbucks</a>
+      </div>
+    </div>
+
+    <div class="transport"><span class="transport-icon">🚆</span><span><strong>太宰府駅 → 西鐵二日市 → 西鐵柳川駅</strong>　約 50 分鐘（轉車 1 次）</span></div>
+
+    <div class="stop eat">
+      <span class="stop-time">13:30</span><span class="stop-cat">⭐ 午餐 ⭐</span>
+      <h3 class="stop-name">柳川 · 鰻魚蒸籠飯（三家比較）</h3>
+      <div class="stop-jp-name">うなぎのせいろ蒸し</div>
+      <p class="stop-desc">柳川是<strong>「鰻魚蒸籠飯（うなぎのせいろ蒸し）」</strong>的<em>發源地</em>。跟一般鰻魚飯不同——<strong>醬汁拌飯後再放鰻魚整體蒸過</strong>，米飯吸飽鰻油，米粒粒分明又軟糯。<strong>不在這吃就白來</strong>。</p>
+
+      <div class="info-block info-must">
+        <strong>🍱 三家鰻魚蒸籠飯比較：</strong>
+        <table class="edu-table">
+          <thead><tr><th>店名</th><th>特色</th><th>價位</th><th>等待時間</th></tr></thead>
+          <tbody>
+            <tr><td><strong>元祖本吉屋</strong></td><td>1681 年創業，<em>蒸籠飯發源店</em>。Tabelog 3.72</td><td>¥4,500-8,000</td><td>2-3 小時（現點現做）</td></tr>
+            <tr><td><strong>若松屋</strong></td><td>1854 年創業，<em>百年老店</em>。Tabelog 3.65。<em>套票折扣店</em></td><td>¥3,000-4,500</td><td>30-60 分鐘</td></tr>
+            <tr><td><strong>御花本邸</strong></td><td>柳川藩主立花家舊宅內用餐，<em>名勝指定園邸</em></td><td>¥4,500-6,500</td><td>40-80 分鐘</td></tr>
+            <tr><td>六騎</td><td>若松屋對面，價格最親民</td><td>¥2,500-3,500</td><td>30 分鐘</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-block info-howto">
+        <strong>🎯 我的推薦邏輯：</strong>
+        <ul>
+          <li><strong>套票折扣</strong> + <strong>等待短</strong> → <strong>若松屋</strong>（最佳 CP）</li>
+          <li><strong>歷史朝聖</strong>需求 → <strong>本吉屋</strong>（要忍受 2 小時等）</li>
+          <li><strong>環境氛圍</strong>優先 → <strong>御花本邸</strong>（藩主舊宅內用餐）</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-must">
+        <strong>🥢 必點：</strong>
+        <ul>
+          <li><strong>せいろ蒸し定食</strong>（蒸籠飯定食 ¥3,500-4,500）— 必點主餐，<em>蒲燒鰻 + 蛋絲 + 醬油飯</em></li>
+          <li><strong>うざく</strong>（鰻魚醋拌小黃瓜）— 開胃小菜</li>
+          <li><strong>うまき</strong>（鰻魚玉子燒）— ¥800</li>
+          <li><strong>白燒鰻</strong>（不沾醬汁素燒，配山葵醬油）—吃出鰻魚原味</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⚠️ 訂位策略：</strong>黃金週<em>必訂</em>。建議 12:00 提前到柳川先吃午餐，遊船排在下午（避開排隊地獄）。<br>
+        <strong>📞 訂位：</strong>若松屋 0944-72-3163 / 御花 0944-73-2189 / 本吉屋 0944-72-6155
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card food" href="https://www.google.com/search?q=うなぎ+せいろ蒸し+柳川&tbm=isch" target="_blank"><span class="img-card-emoji">🍱</span><div class="img-card-sub">SEIRO MUSHI</div><div class="img-card-label">蒸籠鰻魚飯</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=若松屋+柳川&tbm=isch" target="_blank"><span class="img-card-emoji">🏠</span><div class="img-card-sub">WAKAMATSU</div><div class="img-card-label">若松屋</div></a>
+        <a class="img-card shrine" href="https://www.google.com/search?q=御花+柳川&tbm=isch" target="_blank"><span class="img-card-emoji">🌸</span><div class="img-card-sub">OHANA</div><div class="img-card-label">御花本邸</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=若松屋+柳川" target="_blank">📍 若松屋</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=御花+柳川" target="_blank">📍 御花</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=本吉屋+柳川" target="_blank">📍 本吉屋</a>
+      </div>
+    </div>
+
+    <div class="stop experience">
+      <span class="stop-time">15:00</span><span class="stop-cat">⭐ 體驗 ⭐</span>
+      <h3 class="stop-name">柳川遊船 · どんこ舟</h3>
+      <div class="stop-jp-name">柳川川下り（やながわかわくだり）· どんこ舟</div>
+      <p class="stop-desc">柳川是<strong>「九州威尼斯」</strong>，城內 930 公里人工河蛛網密布。搭<em>斗笠船夫</em>撐的木舟，<strong>船程 70 分鐘</strong>，4.5 公里長。<em>松月乘船場</em>出發，沖端下船。</p>
+
+      <div class="info-block info-must">
+        <strong>🛶 必看橋段：</strong>
+        <ul>
+          <li><strong>船夫唱民謠</strong>—全程會唱 2-3 首傳統日本童謠（如「待ちぼうけ」），聲音在水面回蕩</li>
+          <li><strong>低矮石橋 12 座</strong>—船夫會喊「<em>頭下げて！</em>（頭低下！）」</li>
+          <li><strong>跳橋表演</strong>（重點！）— 多在<em>「竹門橋」</em>進行，船夫靠近時翻身爬上橋面，揮手道別後縱身一躍跳回船。<em>不是每艘船都會跳，看船夫年齡與心情</em>。</li>
+          <li><strong>船尾爐子</strong>—冷天會在船上烤紅薯/煮關東煮（天熱沒有）</li>
+          <li>沿岸<strong>柳樹拂水</strong>，5 月新綠最美</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-howto">
+        <strong>🛳️ 7 個船家比較：</strong>
+        <ul>
+          <li><strong>柳川観光開発（松月乘船場）</strong>— 套票指定，從西鐵柳川駅有<em>免費接駁車</em>，最方便（推這個）</li>
+          <li>柳川大東乗船場、城門観光、水郷柳川観光、柳川観光船、白柳荘 — 其他選項</li>
+          <li><strong>9:30-14:30</strong> 出航時段，70 分鐘船程</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>👘 加碼：</strong>柳川駅旁有<em>「きもの處 美和」</em>租和服 ¥3,000-5,000，<strong>穿和服搭遊船氛圍滿分</strong>，可拍照打卡。<br>
+        <strong>🌧️ 雨天：</strong>船有遮雨棚，照常出航。冬天有<em>炬燵船</em>（暖桌船）。
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card nature" href="https://www.google.com/search?q=柳川川下り+船頭&tbm=isch" target="_blank"><span class="img-card-emoji">🛶</span><div class="img-card-sub">BOATMAN</div><div class="img-card-label">船夫撐船</div></a>
+        <a class="img-card nature" href="https://www.google.com/search?q=柳川+橋下&tbm=isch" target="_blank"><span class="img-card-emoji">🌉</span><div class="img-card-sub">LOW BRIDGES</div><div class="img-card-label">低矮石橋</div></a>
+        <a class="img-card nature" href="https://www.google.com/search?q=柳川+着物+川下り&tbm=isch" target="_blank"><span class="img-card-emoji">👘</span><div class="img-card-sub">KIMONO</div><div class="img-card-label">和服遊船</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=柳川川下り+松月" target="_blank">📍 松月碼頭</a>
+        <a class="btn" href="https://www.google.com/search?q=柳川川下り&tbm=isch" target="_blank">📷 圖片</a>
+      </div>
+    </div>
+
+    <div class="stop">
+      <span class="stop-time">16:30</span><span class="stop-cat">散步</span>
+      <h3 class="stop-name">北原白秋故居 / 柳川老街</h3>
+      <div class="stop-jp-name">北原白秋生家</div>
+      <p class="stop-desc">日本童謠詩人北原白秋故居（1885-1942），江戶時代風格木造老宅，門票 ¥600。喜歡老建築可進去逛 30 分鐘。<strong>不喜歡可跳過</strong>，直接搭船末端散步老街即可。</p>
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=北原白秋生家" target="_blank">📍 Google Maps</a>
+      </div>
+    </div>
+
+    <div class="transport"><span class="transport-icon">🚆</span><span><strong>西鐵柳川駅 → 西鐵福岡（天神）</strong>　西鐵特急 · 約 50 分鐘</span></div>
+
+    <div class="stop eat">
+      <span class="stop-time">19:30</span><span class="stop-cat">晚餐</span>
+      <h3 class="stop-name">大山牛腸鍋 / 屋台二刷</h3>
+      <div class="stop-jp-name">もつ鍋大山 / 中洲屋台</div>
+      <p class="stop-desc">福岡牛腸鍋天花板。詳細介紹見 <strong>Plan A 同名段落</strong>（必點：大山套餐 ¥5,500、軟醋牛雜、強棒麵收尾）。<br>或者你想吃屋台沒吃到的攤位 → 直接二刷中洲屋台街。</p>
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=もつ鍋大山+本店" target="_blank">📍 大山本店</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=中洲屋台街" target="_blank">📍 中洲屋台</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="reservations">
+    <h3>📞 Day 3 (Plan B) 必訂事項</h3>
+    <ul class="reservations-list">
+      <li><strong>太宰府柳川観光きっぷ</strong> ¥3,170 <em>當天現場買</em></li>
+      <li><strong>柳川鰻魚蒸籠飯</strong>（若松屋 / 御花 / 本吉屋） <em>強烈建議訂位</em></li>
+      <li><strong>大山牛腸鍋</strong> 19:30 晚餐 <em>提前訂</em></li>
+    </ul>
+  </div>
+
+  </div><!-- /Plan B -->
+
+</section>
+
+<!-- ============== DAY 4 ============== -->
+<section id="day4" class="day-section">
+  <div class="day-header">
+    <div class="day-meta"><span>DAY 04</span><span class="day-meta-tag">5/4 (一) · 糸島</span></div>
+    <h2 class="day-title">糸島 · 明太子 + 海岸藝術</h2>
+    <div class="day-title-jp">糸島の海と工房</div>
+    <p class="day-summary">糸島是<strong>福岡的小夏威夷</strong>——海岸線、藝術駐村、咖啡廳、白色鳥居、海鮮燒烤。早上先去 <strong>HAKU HAKU</strong> 親手做明太子（30 分鐘 ¥2,000），下午整個泡在糸島海岸。<em>5 月牡蠣小屋已收</em>，改去濱燒白濱家或糸島海鮮堂吃海鮮丼。</p>
+  </div>
+
+  <div class="image-strip">
+    <a class="img-card food" href="https://www.google.com/search?q=HAKUHAKU+明太子+体験&tbm=isch" target="_blank"><span class="img-card-emoji">🌶️</span><div class="img-card-sub">MENTAIKO DIY</div><div class="img-card-label">HAKU HAKU 明太子</div></a>
+    <a class="img-card sea" href="https://www.google.com/search?q=糸島+浜焼き白浜家&tbm=isch" target="_blank"><span class="img-card-emoji">🦐</span><div class="img-card-sub">SEAFOOD BBQ</div><div class="img-card-label">濱燒白濱家</div></a>
+    <a class="img-card sea" href="https://www.google.com/search?q=糸島+二見ヶ浦+鳥居&tbm=isch" target="_blank"><span class="img-card-emoji">⛩️</span><div class="img-card-sub">WHITE TORII</div><div class="img-card-label">二見浦白鳥居</div></a>
+    <a class="img-card sea" href="https://www.google.com/search?q=糸島+Palm+Beach+Gardens&tbm=isch" target="_blank"><span class="img-card-emoji">🌴</span><div class="img-card-sub">PALM BEACH</div><div class="img-card-label">海邊咖啡</div></a>
+    <a class="img-card food" href="https://www.google.com/search?q=博多華味鳥+水炊き&tbm=isch" target="_blank"><span class="img-card-emoji">🍲</span><div class="img-card-sub">MIZUTAKI</div><div class="img-card-label">博多華味鳥水炊鍋</div></a>
+  </div>
+
+  <div class="day-map">
+    <iframe src="https://www.google.com/maps?q=糸島市+二見ヶ浦&hl=zh-TW&output=embed&z=10" loading="lazy" allowfullscreen></iframe>
+    <a class="day-map-cta" href="https://www.google.com/maps/dir/博多駅/HAKUHAKU+ふくや/桜井二見ヶ浦/Palm+Beach+The+Gardens/櫻井神社/博多駅" target="_blank" rel="noopener">🗺️ 在 Google Maps 開啟今日完整路線</a>
+  </div>
+
+  <div class="timeline">
+
+    <div class="stop"><span class="stop-time">08:30</span><span class="stop-cat">早餐</span><h3 class="stop-name">飯店早餐 / 博多駅咖啡店</h3><p class="stop-desc">輕量早餐就好，午餐要吃海鮮。</p></div>
+
+    <div class="stop experience">
+      <span class="stop-time">09:30</span><span class="stop-cat">⭐ 體驗 ⭐</span>
+      <h3 class="stop-name">HAKU HAKU · 明太子手作體驗</h3>
+      <div class="stop-jp-name">博多の食と文化の博物館 ハクハク</div>
+      <p class="stop-desc">福屋（FUKUYA）明太子總公司直營博物館，原本是工廠，2013 年改建。<strong>「My 明太子」體驗 ¥2,000</strong>——自選辣度醃製 3 條（約 100g），<em>30 分鐘</em>做完，<strong>帶回國冷藏 5 天熟成</strong>即可吃。每天 11:00、13:30、15:00 三場（你的時段是 11:00 場）。</p>
+
+      <div class="info-block info-howto">
+        <strong>📋 體驗流程：</strong><br>
+        ① 報到 + 換工作服 + 戴手套<br>
+        ② 講解明太子歷史 5 分鐘<br>
+        ③ 自選 3 條鱈魚卵 + 自選辣度（甘口/中辛/辛口）<br>
+        ④ 加入醃漬液 + 簽名密封容器<br>
+        ⑤ 結束 → 室溫帶 8 小時 OK，後冷藏熟成<strong>5 天</strong>即可吃<br>
+        <strong>耗時：</strong>30-40 分鐘
+      </div>
+
+      <div class="info-block info-must">
+        <strong>🎯 加碼推薦：</strong>
+        <ul>
+          <li><strong>明太子茶泡飯吃到飽</strong>（¥1,500）— 體驗結束後直接點午餐<em>暖場</em>，自助式無限續</li>
+          <li><strong>工廠參觀</strong>（門票 ¥300）— 看明太子生產線</li>
+          <li><strong>限定商品</strong>—工廠直營限定的<em>明太子法國麵包</em>（¥600）和明太子大福</li>
+          <li><strong>各種辣度試吃</strong>—7 種口味免費</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⚠️ 公休日：</strong>每週<em>二、三公休</em>，新年元旦也休。所以 5/4(一) OK，<strong>5/5(二) 是公休日</strong>，這是我把 HAKU HAKU 排在 Day 4 的原因。<br>
+        <strong>📞 預約：</strong>建議官網提前預約場次（黃金週可能滿）。<br>
+        <strong>🚖 交通：</strong>地鐵<em>東比恵駅</em> 步行 10 分 / 計程車 5 分<br>
+        <strong>📍 地址：</strong>福岡市東區社領 2-14-28
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card food" href="https://www.google.com/search?q=福屋+明太子+手作&tbm=isch" target="_blank"><span class="img-card-emoji">🌶️</span><div class="img-card-sub">DIY</div><div class="img-card-label">手作明太子</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=明太子茶漬け+ふくや&tbm=isch" target="_blank"><span class="img-card-emoji">🍵</span><div class="img-card-sub">CHAZUKE</div><div class="img-card-label">明太子茶泡飯</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=HAKUHAKU+ふくや+博多" target="_blank">📍 Google Maps</a>
+        <a class="btn" href="https://117hakuhaku.com/" target="_blank">🌐 官網預約</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <span class="transport-icon">🚖</span>
+      <span><strong>HAKU HAKU → 糸島</strong>　計程車 · 40-50 分鐘 · ¥6,000-7,000（最便利） / 或 → 博多駅 → JR 筑前前原駅 → 巴士（1h15m · ¥800）</span>
+    </div>
+
+    <div class="stop eat">
+      <span class="stop-time">12:30</span><span class="stop-cat">⭐ 午餐 ⭐</span>
+      <h3 class="stop-name">濱燒白濱家 · 海鮮 BBQ 吃到飽</h3>
+      <div class="stop-jp-name">浜焼き 白浜家（しらはまや）</div>
+      <p class="stop-desc">糸島<strong>芥屋漁港</strong>邊的人氣濱燒餐廳，店面時尚簡約，眼前一望無際海景。以<strong>近破盤價</strong>提供肥美牡蠣、帆立貝、紅蝦、鮑魚等鮮活海鮮 + 海鮮丼<strong>吃到飽</strong>。<em>5 月牡蠣小屋已收，這裡可以填補</em>。</p>
+
+      <div class="info-block info-must">
+        <strong>🍴 套餐選擇：</strong>
+        <ul>
+          <li><strong>海鮮燒烤吃到飽</strong>（90 分鐘 ¥4,500-6,000/人）— 牡蠣、帆立、紅蝦、鮑魚、烏賊、肉類</li>
+          <li><strong>呼子イカ活造り定食</strong>（¥3,800）— 也可以吃到透明花枝</li>
+          <li><strong>糸島海鮮丼</strong>（¥1,800）— 不想 BBQ 可選這個</li>
+          <li><strong>烤牡蠣單點</strong>—也可加 ¥1,500-2,000/kg 單買</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-howto">
+        <strong>🆘 替代方案（如不想 BBQ）：</strong>
+        <ul>
+          <li><strong>糸島海鮮堂</strong>（二見浦本店）— 海景第一排，<em>海鮮丼專門店</em>，¥1,500-2,500</li>
+          <li><strong>糸島食堂</strong>—海邊海鮮丼，CP 高</li>
+          <li><strong>志摩之四季</strong>—漁協直營，海鮮丼 ¥1,200-2,000</li>
+          <li><strong>福ふくの里</strong>—漁協直營餐廳，海鮮丼 + 烤魚</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⚠️ 訂位：</strong>白濱家黃金週午餐可能爆滿，<em>建議訂位 092-328-2331</em>。<br>
+        <strong>📍 地址：</strong>糸島市志摩芥屋 677
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card sea" href="https://www.google.com/search?q=浜焼き白浜家+糸島&tbm=isch" target="_blank"><span class="img-card-emoji">🦐</span><div class="img-card-sub">BBQ</div><div class="img-card-label">海鮮燒烤</div></a>
+        <a class="img-card sea" href="https://www.google.com/search?q=糸島海鮮丼&tbm=isch" target="_blank"><span class="img-card-emoji">🍣</span><div class="img-card-sub">SEAFOOD BOWL</div><div class="img-card-label">糸島海鮮丼</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=浜焼き白浜家" target="_blank">📍 白濱家</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=糸島海鮮堂+二見ヶ浦" target="_blank">📍 海鮮堂</a>
+        <a class="btn" href="https://www.hamayaki-shirahamaya.com/" target="_blank">🌐 官網</a>
+      </div>
+    </div>
+
+    <div class="stop">
+      <span class="stop-time">14:30</span><span class="stop-cat">📸 拍照</span>
+      <h3 class="stop-name">櫻井二見浦 · 夫妻岩 + 白鳥居</h3>
+      <div class="stop-jp-name">桜井二見ヶ浦</div>
+      <p class="stop-desc">糸島招牌畫面：<strong>白色鳥居佇立海中</strong>，後方兩塊岩石用注連繩相連（夫妻岩）。「日本の渚百選」、夕陽絕景。</p>
+
+      <div class="info-block info-must">
+        <strong>📸 拍照角度：</strong>
+        <ul>
+          <li><strong>主角度</strong>—白鳥居 + 夫妻岩 + 海平線（停車場下海邊）</li>
+          <li><strong>側拍</strong>—鳥居側面 + 海岸延伸線（南側石階）</li>
+          <li><strong>夕陽</strong>—5 月日落約 18:50，可選擇排這個時間</li>
+          <li><strong>低角度</strong>—蹲下用礁石當前景</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⏰ 停留：</strong>30-45 分鐘（純拍照）/ 1.5h（含夕陽）<br>
+        <strong>💡 私房：</strong>對面有<em>「Sunset Boulevard」日落大道</em>，沿海開車 30 公里都可看夕陽
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=桜井二見ヶ浦" target="_blank">📍 Google Maps</a>
+      </div>
+    </div>
+
+    <div class="stop eat">
+      <span class="stop-time">15:30</span><span class="stop-cat">咖啡</span>
+      <h3 class="stop-name">Palm Beach The Gardens · 海邊複合咖啡</h3>
+      <div class="stop-jp-name">パームビーチ ザ ガーデンズ</div>
+      <p class="stop-desc">糸島最有名的海邊複合<strong>咖啡 / 餐廳區</strong>，棕櫚樹 + 沙灘 + 白色建築，氛圍像加州海岸。可以<em>畫畫、發呆、吃 pancake</em>。</p>
+
+      <div class="info-block info-must">
+        <strong>☕ 推薦店家（Gardens 內 4 家）：</strong>
+        <ul>
+          <li><strong>SUNSET CAFE</strong>—主打 pancake + 咖啡 ¥1,500</li>
+          <li><strong>BEACH CAFE SUNSET</strong>—海景 BBQ ¥3,000-5,000</li>
+          <li><strong>BISTRO &amp; CAFE TIME</strong>—pasta + 紅酒 ¥2,500</li>
+          <li><strong>CHARLEMAGNE Bouvardia</strong>—甜點專門</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-howto">
+        <strong>🌊 想再小眾的選擇：</strong>
+        <ul>
+          <li><strong>Sumi Cafe</strong>—民宅改的隱藏咖啡，竹林環繞</li>
+          <li><strong>CURRENT</strong>—懸崖上的海景咖啡，瑪格麗特披薩出名</li>
+          <li><strong>橙果樹義式冰淇淋</strong>—改裝<em>紅色倫敦巴士</em>賣冰淇淋</li>
+          <li><strong>Beach Cafe SUNSET</strong>—鞦韆 + 海景拍照</li>
+        </ul>
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card sea" href="https://www.google.com/search?q=Palm+Beach+Gardens+糸島&tbm=isch" target="_blank"><span class="img-card-emoji">🌴</span><div class="img-card-sub">PALM BEACH</div><div class="img-card-label">Palm Beach</div></a>
+        <a class="img-card sea" href="https://www.google.com/search?q=糸島+ロンドンバス+アイスクリーム&tbm=isch" target="_blank"><span class="img-card-emoji">🚌</span><div class="img-card-sub">LONDON BUS</div><div class="img-card-label">紅色巴士冰淇淋</div></a>
+        <a class="img-card sea" href="https://www.google.com/search?q=Sumi+Cafe+糸島&tbm=isch" target="_blank"><span class="img-card-emoji">🌿</span><div class="img-card-sub">HIDDEN</div><div class="img-card-label">Sumi Cafe</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Palm+Beach+The+Gardens+糸島" target="_blank">📍 Palm Beach</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sumi+Cafe+糸島" target="_blank">📍 Sumi Cafe</a>
+      </div>
+    </div>
+
+    <div class="stop">
+      <span class="stop-time">17:00</span><span class="stop-cat">私房</span>
+      <h3 class="stop-name">櫻井神社 · 嵐成員聖地</h3>
+      <div class="stop-jp-name">櫻井神社（さくらい じんじゃ）</div>
+      <p class="stop-desc">嵐成員<em>大野智的「聖地」</em>但其實本身是<strong>400 年歷史</strong>的安靜山林神社（1632 年建），幾乎沒觀光客。<em>森林環繞、苔石階、鎮社靈泉</em>，是糸島少有的精神放空點。</p>
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=櫻井神社+糸島" target="_blank">📍 Google Maps</a>
+      </div>
+    </div>
+
+    <div class="transport"><span class="transport-icon">🚆</span><span><strong>糸島 → 博多駅</strong>　JR 筑肥線（從筑前前原駅）· 約 50 分鐘 · ¥570</span></div>
+
+    <div class="stop eat">
+      <span class="stop-time">20:00</span><span class="stop-cat">⭐ 晚餐 ⭐</span>
+      <h3 class="stop-name">博多華味鳥 中洲本店 · 水炊鍋</h3>
+      <div class="stop-jp-name">水たき料亭 博多華味鳥</div>
+      <p class="stop-desc">最後一晚晚餐——<strong>福岡鄉土料理「水炊鍋」</strong>。雞骨白湯熬到濃稠像奶茶，先喝湯、再煮<em>華味鳥</em>（自家品牌，北九州銘牌雞）+ 蔬菜，最後雜炊（粥）收尾。<strong>2025/10 改裝後重新開業</strong>，全新空間。</p>
+
+      <div class="info-block info-must">
+        <strong>🍲 必點套餐：</strong>
+        <ul>
+          <li><strong>華宴會套餐 ¥6,000</strong>（人氣 No.1）— 小菜 + 華味鳥生火腿 + 老雞炭烤 + 水炊鍋 + 蔬菜 + 甜點</li>
+          <li><strong>華貴宴 ¥8,500</strong>— 加碼華味鳥刺身 + 燒鳥 5 種</li>
+          <li><strong>單品必加：</strong>炭烤老雞（¥1,800）、華味鳥唐揚（¥900）、雜炊（¥600，鍋底加米煮成粥）、雞蛋素麵（¥800）</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-howto">
+        <strong>🍴 水炊鍋吃法（重要）：</strong><br>
+        ① 上桌時先<em>喝一口純白湯</em>（不加任何東西）<br>
+        ② 加入鹽 + 柚子胡椒調味<br>
+        ③ 下雞肉煮 5-7 分鐘 → 沾<em>橙醋</em>吃<br>
+        ④ 下蔬菜煮 → 配豆腐<br>
+        ⑤ 最後加米 → 雜炊收尾（一定要！精華都在湯裡）
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>⚠️ 訂位：</strong>必訂！特別套餐需<em>4 人以上</em>且提前 3 日預約。<br>
+        <strong>📞 預約：</strong>網站可預約，可累樂天積分。<br>
+        <strong>🆘 訂不到的備案：</strong>
+        <ul>
+          <li><strong>水たき長野</strong>（博多老舖，米其林必比登）— 1907 年創業</li>
+          <li><strong>橘井（kissui）</strong>—大名町，米其林必比登</li>
+          <li><strong>新三浦</strong>—1910 年創業，老派水炊</li>
+        </ul>
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card food" href="https://www.google.com/search?q=博多華味鳥+水炊き&tbm=isch" target="_blank"><span class="img-card-emoji">🍲</span><div class="img-card-sub">MIZUTAKI</div><div class="img-card-label">水炊鍋</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=華味鳥+鶏刺し&tbm=isch" target="_blank"><span class="img-card-emoji">🐓</span><div class="img-card-sub">HANAMIDORI</div><div class="img-card-label">華味鳥刺身</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=雑炊+水炊き&tbm=isch" target="_blank"><span class="img-card-emoji">🍚</span><div class="img-card-sub">ZOSUI</div><div class="img-card-label">雜炊收尾</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=博多華味鳥+中洲本店" target="_blank">📍 華味鳥</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=水たき長野" target="_blank">📍 水たき長野</a>
+        <a class="btn" href="https://www.hanamidori.net/lp_cn/" target="_blank">🌐 官網</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="reservations">
+    <h3>📞 Day 4 必訂事項</h3>
+    <ul class="reservations-list">
+      <li><strong>HAKU HAKU 明太子體驗</strong> 09:30 / 11:00 場 <em>網站預約</em></li>
+      <li><strong>濱燒白濱家</strong> 12:30 午餐 <em>提前訂</em></li>
+      <li><strong>博多華味鳥</strong> 20:00 晚餐 <em>提前 3 日訂特別套餐</em></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============== DAY 5 ============== -->
+<section id="day5" class="day-section">
+  <div class="day-header">
+    <div class="day-meta"><span>DAY 05</span><span class="day-meta-tag">5/5 (二) · 返程</span></div>
+    <h2 class="day-title">最後一頓 · 採購 · 機場</h2>
+    <div class="day-title-jp">最後の朝食と帰路</div>
+    <p class="day-summary">12:20 起飛，10:30 必須抵機場（國際線航廈須接駁）。早起 1 小時把<strong>博多名物早餐</strong>吃滿，<strong>博多デイトス + マイング</strong>地下街掃伴手禮。明太子、博多通りもん 是必買。</p>
+  </div>
+
+  <div class="image-strip">
+    <a class="img-card food" href="https://www.google.com/search?q=博多めん街道+牧のうどん&tbm=isch" target="_blank"><span class="img-card-emoji">🍜</span><div class="img-card-sub">UDON</div><div class="img-card-label">博多烏龍麵</div></a>
+    <a class="img-card food" href="https://www.google.com/search?q=博多通りもん&tbm=isch" target="_blank"><span class="img-card-emoji">🥮</span><div class="img-card-sub">TORIMON</div><div class="img-card-label">博多通りもん</div></a>
+    <a class="img-card food" href="https://www.google.com/search?q=ふくや+明太子&tbm=isch" target="_blank"><span class="img-card-emoji">🌶️</span><div class="img-card-sub">FUKUYA</div><div class="img-card-label">福屋明太子</div></a>
+    <a class="img-card food" href="https://www.google.com/search?q=めんべい&tbm=isch" target="_blank"><span class="img-card-emoji">🍘</span><div class="img-card-sub">MENBEI</div><div class="img-card-label">明太子仙貝</div></a>
+  </div>
+
+  <div class="day-map">
+    <iframe src="https://www.google.com/maps?q=博多駅,福岡&hl=zh-TW&output=embed&z=15" loading="lazy" allowfullscreen></iframe>
+    <a class="day-map-cta" href="https://www.google.com/maps/dir/博多駅/博多デイトス/マイング/福岡空港" target="_blank" rel="noopener">🗺️ 在 Google Maps 開啟今日完整路線</a>
+  </div>
+
+  <div class="timeline">
+
+    <div class="stop">
+      <span class="stop-time">07:00</span><span class="stop-cat">退房</span>
+      <h3 class="stop-name">飯店退房 + 寄存行李</h3>
+      <p class="stop-desc">行李寄存於<strong>博多駅 coin locker</strong>（中央口/筑紫口都有，¥600-800/大件）或飯店保管。留隨身包就好。</p>
+    </div>
+
+    <div class="stop eat">
+      <span class="stop-time">07:30</span><span class="stop-cat">⭐ 早餐</span>
+      <h3 class="stop-name">博多めん街道 · 早場拉麵 / 烏龍麵</h3>
+      <div class="stop-jp-name">博多めん街道（博多デイトス内）</div>
+      <p class="stop-desc">博多駅內<strong>「博多めん街道」</strong>多家拉麵 / 烏龍麵<em>7-8 點開門</em>，是早餐+採購一條龍最佳選擇。</p>
+
+      <div class="info-block info-must">
+        <strong>🍜 早餐推薦：</strong>
+        <ul>
+          <li><strong>牧のうどん 博多デイトス店</strong>（07:00 開）— 博多代表烏龍麵，<em>麵湯越泡越粗</em>。必點：肉ごぼう天うどん（牛肉牛蒡天烏龍 ¥720）</li>
+          <li><strong>博多一幸舎</strong>（07:00 開）— 豚骨拉麵激戰區代表。必點：泡系豚骨拉麵 ¥850</li>
+          <li><strong>博多元助</strong>—極細麺豚骨拉麵 ¥800</li>
+          <li><strong>福岡空港 ラーメン滑走路</strong>— 機場內 11 家拉麵店，可吃到博多 → 福岡市 → 久留米 → 熊本 → 鹿兒島不同口味</li>
+          <li><strong>一蘭 Canal City 24h 店</strong>—24 小時，最保險選擇</li>
+        </ul>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=博多めん街道" target="_blank">📍 博多めん街道</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=ラーメン滑走路+福岡空港" target="_blank">📍 拉麵滑走路</a>
+      </div>
+    </div>
+
+    <div class="stop">
+      <span class="stop-time">08:30</span><span class="stop-cat">⭐ 採購 ⭐</span>
+      <h3 class="stop-name">博多デイトス + マイング · 伴手禮</h3>
+      <div class="stop-jp-name">博多デイトス・マイング</div>
+      <p class="stop-desc">博多駅地下街<strong>伴手禮一站搞定</strong>。博多デイトス（博多 DEITOS）與マイング（MING）兩個地下街相連，全部走完約 1 小時。</p>
+
+      <div class="info-block info-must">
+        <strong>🛍️ 必買清單：</strong>
+        <ul>
+          <li><strong>明太子（保冷必）</strong>—福屋 FUKUYA（中辛 100g ¥1,500）/ 博多 Haneya / かねふく / やまや</li>
+          <li><strong>博多通りもん</strong>（10 年蟬聯 Monde Selection 金獎奶皇饅頭）—1 盒 8 個 ¥1,200，賞味期限 17 天</li>
+          <li><strong>千鳥饅頭</strong>—九州銘菓，¥600/盒 6 個</li>
+          <li><strong>めんべい</strong>（明太子仙貝）—¥800/盒，多家 OEM</li>
+          <li><strong>博多 Yamaya 明太子</strong>—禮盒包裝精美，¥2,000+</li>
+          <li><strong>二鶴堂 博多の女</strong>—蛋糕卷，¥600</li>
+          <li><strong>ひよ子饅頭</strong>—小雞造型饅頭，¥800</li>
+        </ul>
+      </div>
+
+      <div class="info-block info-tips">
+        <strong>❄️ 明太子保冷攻略：</strong><br>
+        ・店家提供<strong>保冷袋 + 冰塊</strong>（含在價格內）<br>
+        ・買到登機<strong>6 小時內保鮮</strong>沒問題<br>
+        ・回到台灣<strong>馬上冷藏</strong>，冷藏 7 天 / 冷凍 3 個月<br>
+        ・<em>沒冷藏的明太子是違規食品，但保冷袋 OK</em>
+      </div>
+
+      <div class="info-block info-howto">
+        <strong>🆘 漏買補救：</strong>福岡空港國際線也有 <em>明太子 / 博多通りもん 專櫃</em>，但選擇較少、價格略高 5-10%。
+      </div>
+
+      <div class="image-strip">
+        <a class="img-card food" href="https://www.google.com/search?q=博多通りもん&tbm=isch" target="_blank"><span class="img-card-emoji">🥮</span><div class="img-card-sub">CUSTARD BUN</div><div class="img-card-label">博多通りもん</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=ふくや+明太子+ギフト&tbm=isch" target="_blank"><span class="img-card-emoji">🌶️</span><div class="img-card-sub">FUKUYA GIFT</div><div class="img-card-label">福屋明太子禮盒</div></a>
+        <a class="img-card food" href="https://www.google.com/search?q=ひよ子饅頭&tbm=isch" target="_blank"><span class="img-card-emoji">🐤</span><div class="img-card-sub">HIYOKO</div><div class="img-card-label">小雞饅頭</div></a>
+      </div>
+
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=博多デイトス" target="_blank">📍 博多デイトス</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=マイング+博多駅" target="_blank">📍 マイング</a>
+      </div>
+    </div>
+
+    <div class="stop"><span class="stop-time">10:00</span><span class="stop-cat">取行李</span><h3 class="stop-name">取行李 → 機場</h3><p class="stop-desc">取出寄存的行李，地鐵到福岡空港只要 5 分鐘。</p></div>
+
+    <div class="transport"><span class="transport-icon">🚇</span><span><strong>博多駅 → 福岡空港駅</strong>　地下鐵空港線 · 5 分鐘 · ¥260</span></div>
+
+    <div class="stop move">
+      <span class="stop-time">10:30</span><span class="stop-cat">⚠️ 機場</span>
+      <h3 class="stop-name">福岡空港國際線 · 接駁巴士 重要</h3>
+      <p class="stop-desc">福岡空港<strong>國內線航廈與國際線航廈分開</strong>！地鐵抵達的是<em>國內線</em>，需轉乘<strong>免費接駁巴士到國際線</strong>（10 分鐘車程，5-10 分鐘 1 班）。<strong>務必預留 15 分鐘給接駁</strong>。</p>
+      <div class="info-block info-howto">
+        <strong>⏰ 倒數時間表：</strong><br>
+        10:30 抵國內線航廈<br>
+        10:35 上接駁巴士（1 號出口出站即達）<br>
+        10:50 抵國際線航廈<br>
+        10:55-11:30 check-in + 過安檢 + 海關<br>
+        11:30-12:05 國際線免稅店補貨<br>
+        12:05 抵登機口<br>
+        12:20 起飛
+      </div>
+      <div class="stop-actions">
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=福岡空港+国際線ターミナル" target="_blank">📍 國際線</a>
+      </div>
+    </div>
+
+    <div class="stop"><span class="stop-time">12:20</span><span class="stop-cat">✈️</span><h3 class="stop-name">起飛 · 福岡 → 台北</h3><p class="stop-desc">五日深度遊收工。さよなら、福岡。</p></div>
+
+  </div>
+</section>
+
+<!-- ============== HOTELS ============== -->
+<section id="hotels" class="hotel-section-wrap">
+  <div class="day-header">
+    <div class="day-meta"><span>住宿建議</span><span class="day-meta-tag">3 STAR+ · 黃金週可訂</span></div>
+    <h2 class="day-title">住宿建議 · 3 階梯 9 選</h2>
+    <div class="day-title-jp">ホテル選び</div>
+    <p class="day-summary"><strong>所有飯店都選博多駅周邊</strong>（步行 3-12 分鐘），原因：所有日歸行程都從博多駅出發，省下每天 30+ 分鐘通勤。<em>價格皆為黃金週估價</em>，平日約打 6-7 折。建議透過 <strong>Booking.com / Agoda / 樂天 Travel / 一休.com</strong> 比價，部分有早鳥折扣。</p>
+  </div>
+
+  <div class="hotel-intro">
+    <strong>🎯 黃金週訂房戰略：</strong>
+    <ul style="margin-top: 8px; padding-left: 20px;">
+      <li>5/1-5/5 房價是平日<strong>1.5-2 倍</strong>，越早訂越穩</li>
+      <li>建議 <strong>提前 2 個月以上訂</strong>，部分飯店有「早鳥優惠」省 10-15%</li>
+      <li>取消政策注意：黃金週多採<em>「3-7 天前取消免費，之後扣 50-100%」</em></li>
+      <li>4 人以下選雙床房，5+ 人考慮民泊或公寓式酒店</li>
+      <li>價格區間都用<strong>標準雙床房（2 人）一晚含稅</strong>表示</li>
+    </ul>
+  </div>
+
+  <!-- TIER 1: 平價 -->
+  <div class="hotel-tier">
+    <div class="hotel-tier-header">
+      <div class="hotel-tier-name">🪙 平價路線</div>
+      <div class="hotel-tier-price">¥10,000-16,000 / 晚</div>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">商務型，乾淨夠用。適合預算優先 / 大部分時間在外面跑的旅客。</p>
+
+    <div class="hotel-grid">
+      <div class="hotel-card">
+        <div class="hotel-name">Sotetsu Fresa Inn 博多筑紫口</div>
+        <div class="hotel-name-jp">相鉄フレッサイン 博多駅筑紫口</div>
+        <div class="hotel-stars">⭐⭐⭐ 3 星</div>
+        <div class="hotel-features">
+          <strong>🚇 博多駅筑紫口步行 5 分鐘</strong><br>
+          連鎖商務飯店，房間 14-16㎡，<em>免費咖啡吧</em>，浴室齊全。最大優點是<em>位置和價格平衡</em>。
+        </div>
+        <div class="hotel-rooms">
+          <div><strong>標準雙床房</strong> 16㎡，2 床 110cm</div>
+          <div><strong>標準雙人房</strong> 14㎡，1 床 140cm</div>
+        </div>
+        <div class="hotel-price">¥11,000-14,000<small> / 晚（含早餐 +¥1,200）</small></div>
+        <span class="hotel-tag">商務型</span>
+        <span class="hotel-tag">早餐附加</span>
+        <span class="hotel-tag">免費咖啡</span>
+        <div class="hotel-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=相鉄フレッサイン+博多駅筑紫口" target="_blank">📍 Map</a>
+          <a class="btn" href="https://www.booking.com/searchresults.zh-tw.html?ss=Sotetsu+Fresa+Inn+Hakata+Chikushi-guchi" target="_blank">🏨 Booking</a>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-name">博多 CROOM 西鐵飯店</div>
+        <div class="hotel-name-jp">西鉄ホテルクルーム博多</div>
+        <div class="hotel-stars">⭐⭐⭐ 3 星</div>
+        <div class="hotel-features">
+          <strong>🚇 博多駅博多口步行 5 分鐘</strong><br>
+          房間細小但設備齊全，<strong>免費室內外天然溫泉 + 桑拿</strong>，部分房有按摩椅。<em>有溫泉 + 平價</em>是特色。
+        </div>
+        <div class="hotel-rooms">
+          <div><strong>標準雙床房</strong> 13.5㎡</div>
+          <div><strong>商務雙人房</strong> 12㎡</div>
+        </div>
+        <div class="hotel-price">¥12,000-15,000<small> / 晚</small></div>
+        <span class="hotel-tag">天然溫泉</span>
+        <span class="hotel-tag">桑拿</span>
+        <span class="hotel-tag">CP 高</span>
+        <div class="hotel-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=西鉄ホテルクルーム博多" target="_blank">📍 Map</a>
+          <a class="btn" href="https://www.booking.com/searchresults.zh-tw.html?ss=Nishitetsu+Hotel+Croom+Hakata" target="_blank">🏨 Booking</a>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-name">東橫 INN 博多駅前</div>
+        <div class="hotel-name-jp">東横INN博多駅前祇園</div>
+        <div class="hotel-stars">⭐⭐ 2.5 星</div>
+        <div class="hotel-features">
+          <strong>🚇 博多駅博多口步行 7 分鐘</strong><br>
+          日本最便宜的可靠連鎖。房間最小但<em>包含早餐 + 早晚咖啡</em>。<em>純粹睡覺找這個</em>。
+        </div>
+        <div class="hotel-rooms">
+          <div><strong>標準雙床房</strong> 12㎡</div>
+          <div><strong>單人雙床</strong> 11㎡</div>
+        </div>
+        <div class="hotel-price">¥9,500-12,000<small> / 晚（含早餐）</small></div>
+        <span class="hotel-tag">最便宜</span>
+        <span class="hotel-tag">免費早餐</span>
+        <span class="hotel-tag">空間小</span>
+        <div class="hotel-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=東横INN博多駅前祇園" target="_blank">📍 Map</a>
+          <a class="btn" href="https://www.toyoko-inn.com/" target="_blank">🌐 官網</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 2: 中階 -->
+  <div class="hotel-tier">
+    <div class="hotel-tier-header">
+      <div class="hotel-tier-name">⭐ 中階 · 我的首推</div>
+      <div class="hotel-tier-price">¥16,000-26,000 / 晚</div>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">設施 + 空間 + 特色 三項都到位，<strong>CP 最高的選擇</strong>。每家都有獨特賣點。</p>
+
+    <div class="hotel-grid">
+      <div class="hotel-card">
+        <div class="hotel-name">Hotel Forza 博多筑紫口 I</div>
+        <div class="hotel-name-jp">Hotel Forza Hakataeki Chikushi-guchi I</div>
+        <div class="hotel-stars">⭐⭐⭐ 3.5 星</div>
+        <div class="hotel-features">
+          <strong>🚇 博多駅筑紫口步行 2-3 分鐘</strong><br>
+          <em>位置最強</em>之一，定位「實用、乾淨、交通至上」。<strong>每間房有 iPad</strong>，可選按摩器或按摩椅房型。房間 18㎡（同價位中算大）。
+        </div>
+        <div class="hotel-rooms">
+          <div><strong>豪華雙床房</strong> 27㎡，2 床 110cm</div>
+          <div><strong>Refresh 高級雙人</strong> 18㎡，足部按摩器</div>
+          <div><strong>Healing 房</strong> 18㎡，按摩椅</div>
+        </div>
+        <div class="hotel-price">¥18,000-22,000<small> / 晚</small></div>
+        <span class="hotel-tag">⭐ 推薦</span>
+        <span class="hotel-tag">每房 iPad</span>
+        <span class="hotel-tag">按摩椅</span>
+        <span class="hotel-tag">距車站近</span>
+        <div class="hotel-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Forza+Hakataeki+Chikushi-guchi+I" target="_blank">📍 Map</a>
+          <a class="btn" href="https://tw.trip.com/hotels/fukuoka-hotel-detail-1498419/" target="_blank">🏨 Trip.com</a>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-name">Dormy Inn Premium 博多運河城前</div>
+        <div class="hotel-name-jp">天然温泉 袖湊の湯 ドーミーインPREMIUM博多・キャナルシティ前</div>
+        <div class="hotel-stars">⭐⭐⭐ 3.5 星</div>
+        <div class="hotel-features">
+          <strong>🚇 博多駅步行 12 分鐘 / 中洲川端駅 7 分鐘</strong><br>
+          <strong>100% 天然溫泉「袖湊之湯」</strong>+ 高溫桑拿 + 冷水浴，15:00-翌 10:00 開放。
+          每晚 21:30-23:00 餐廳<em>免費「夜鳴拉麵」</em>，泡湯後免費冰棒，早晨換養樂多。<em>溫泉控首選</em>。
+        </div>
+        <div class="hotel-rooms">
+          <div><strong>雙床房</strong> 15㎡，2 床 140cm</div>
+          <div><strong>和洋室</strong> 23㎡（隱藏版！可放 2 個 30 吋行李）</div>
+        </div>
+        <div class="hotel-price">¥17,000-23,000<small> / 晚</small></div>
+        <span class="hotel-tag">⭐ 推薦</span>
+        <span class="hotel-tag">天然溫泉</span>
+        <span class="hotel-tag">免費拉麵</span>
+        <span class="hotel-tag">和洋室特殊</span>
+        <div class="hotel-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=ドーミーインPREMIUM博多+キャナルシティ前" target="_blank">📍 Map</a>
+          <a class="btn" href="https://www.hotespa.net/hotels/hakata/" target="_blank">🌐 官網</a>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-name">三井花園飯店 福岡祇園</div>
+        <div class="hotel-name-jp">三井ガーデンホテル福岡祇園</div>
+        <div class="hotel-stars">⭐⭐⭐⭐ 4 星</div>
+        <div class="hotel-features">
+          <strong>🚇 祇園駅步行 1 分鐘 / 博多駅步行 8 分鐘</strong><br>
+          <strong>頂樓室內外溫泉浴場</strong>（市區難得有露天）+ 博多織主題裝潢。標準房 18.7㎡（比 Dormy Inn 大）。<em>溫泉 + 質感空間</em>兼具。
+        </div>
+        <div class="hotel-rooms">
+          <div><strong>標準雙人房</strong> 18.7㎡，1 床 151cm</div>
+          <div><strong>豪華雙床房</strong> 23.9㎡（強推）</div>
+        </div>
+        <div class="hotel-price">¥18,000-25,000<small> / 晚</small></div>
+        <span class="hotel-tag">頂樓溫泉</span>
+        <span class="hotel-tag">博多織主題</span>
+        <span class="hotel-tag">空間大</span>
+        <div class="hotel-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=三井ガーデンホテル福岡祇園" target="_blank">📍 Map</a>
+          <a class="btn" href="https://www.gardenhotels.co.jp/fukuoka-gion/" target="_blank">🌐 官網</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 3: 質感 -->
+  <div class="hotel-tier">
+    <div class="hotel-tier-header">
+      <div class="hotel-tier-name">💎 質感 · 蜜月級</div>
+      <div class="hotel-tier-price">¥26,000-50,000 / 晚</div>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">主題設計、頂級服務、特殊房型。<strong>適合慶祝 / 紀念日 / 想要記住的旅程</strong>。</p>
+
+    <div class="hotel-grid">
+      <div class="hotel-card">
+        <div class="hotel-name">THE BLOSSOM HAKATA Premier</div>
+        <div class="hotel-name-jp">ザ・ブラッサム博多プレミア</div>
+        <div class="hotel-stars">⭐⭐⭐⭐ 4 星</div>
+        <div class="hotel-features">
+          <strong>🚇 博多駅博多口步行 6 分鐘</strong><br>
+          <strong>JR 九州集團旗艦品牌</strong>，<em>博多綢緞主題</em>融合現代設計。男浴場有<em>昭和初期福岡鳥瞰圖</em>，女浴場有<em>柳川 Sagemon</em> 風格。標準房 21-24㎡（同價位最大）。<em>質感最強</em>。
+        </div>
+        <div class="hotel-rooms">
+          <div><strong>標準雙人房</strong> 21-24㎡，queen 160cm</div>
+          <div><strong>NAGOMI 房型</strong> 27㎡（雙床 + 榻榻米區，2-3 人）</div>
+          <div><strong>豪華房型</strong> 30-37㎡（含客廳）</div>
+          <div><strong>HAKATA 樓層</strong> 含咖啡機、浴池、禮盒沐浴用品</div>
+        </div>
+        <div class="hotel-price">¥28,000-40,000<small> / 晚</small></div>
+        <span class="hotel-tag">⭐ 推薦</span>
+        <span class="hotel-tag">博多綢緞主題</span>
+        <span class="hotel-tag">大浴場</span>
+        <span class="hotel-tag">空間最大</span>
+        <div class="hotel-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=THE+BLOSSOM+HAKATA+Premier" target="_blank">📍 Map</a>
+          <a class="btn" href="https://www.jrk-hotels.co.jp/Hakata-Premier/" target="_blank">🌐 官網</a>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-name">The Knot 福岡博多</div>
+        <div class="hotel-name-jp">ザ・ノット 福岡博多</div>
+        <div class="hotel-stars">⭐⭐⭐⭐ 4 星</div>
+        <div class="hotel-features">
+          <strong>🚇 博多駅步行 6 分鐘</strong><br>
+          現代極簡設計品牌飯店，房間 22-26㎡，<em>大窗景</em> + Hay 北歐家具。1F 有<em>本店餐廳 SOUTH 100</em>（米其林必比登）。<em>設計控首選</em>。
+        </div>
+        <div class="hotel-rooms">
+          <div><strong>標準雙人房</strong> 22㎡</div>
+          <div><strong>豪華雙床房</strong> 26㎡，2 床 120cm</div>
+          <div><strong>套房</strong> 38㎡</div>
+        </div>
+        <div class="hotel-price">¥28,000-38,000<small> / 晚</small></div>
+        <span class="hotel-tag">設計感</span>
+        <span class="hotel-tag">米其林餐廳</span>
+        <span class="hotel-tag">北歐風</span>
+        <div class="hotel-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=The+Knot+Fukuoka+Hakata" target="_blank">📍 Map</a>
+          <a class="btn" href="https://hotel-the-knot.jp/fukuokahakata/" target="_blank">🌐 官網</a>
+        </div>
+      </div>
+
+      <div class="hotel-card">
+        <div class="hotel-name">Hotel Okura 福岡</div>
+        <div class="hotel-name-jp">ホテルオークラ福岡</div>
+        <div class="hotel-stars">⭐⭐⭐⭐⭐ 5 星</div>
+        <div class="hotel-features">
+          <strong>🚇 中洲川端駅步行 1 分鐘 / 博多駅 10 分鐘</strong><br>
+          <strong>福岡僅有的 5 星國際品牌</strong>之一。在<em>博多運河城旁</em>，房間 32㎡+，多家米其林餐廳駐場。<em>慶祝級首選</em>。
+        </div>
+        <div class="hotel-rooms">
+          <div><strong>標準雙床房</strong> 32㎡，2 床 130cm</div>
+          <div><strong>運河景豪華</strong> 38㎡</div>
+          <div><strong>行政樓層套房</strong> 65㎡+</div>
+        </div>
+        <div class="hotel-price">¥40,000-70,000<small> / 晚</small></div>
+        <span class="hotel-tag">5 星</span>
+        <span class="hotel-tag">運河景</span>
+        <span class="hotel-tag">米其林餐廳</span>
+        <div class="hotel-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Okura+Fukuoka" target="_blank">📍 Map</a>
+          <a class="btn" href="https://www.fuk.hotelokura.co.jp/" target="_blank">🌐 官網</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reservations">
+    <h3>🏆 我的最終推薦（依預算）</h3>
+    <ul class="reservations-list">
+      <li><strong>低預算 ¥12,000：</strong>博多 CROOM 西鐵 <em>溫泉桑拿 + CP 高</em></li>
+      <li><strong>中預算 ¥20,000：</strong>Dormy Inn Premium 博多 <em>溫泉+免費拉麵+和洋室</em></li>
+      <li><strong>高預算 ¥30,000：</strong>THE BLOSSOM HAKATA Premier <em>主題感+空間大</em></li>
+      <li><strong>蜜月級 ¥40,000+：</strong>Hotel Okura 福岡 <em>運河景+5 星服務</em></li>
+    </ul>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <h3>FUKUOKA 2026 · 5/1 - 5/5</h3>
+  <p>整趟旅程在<strong>日本黃金週</strong>期間，所有熱門餐廳、體驗、JR 特急班次<strong>請務必提前 2-4 週</strong>預訂。</p>
+  <p>🎒 必備：保冷袋（買明太子）、行動電源、Suica/PASMO、現金（呼子朝市、屋台多收現金）、JR 九州周遊券（北部 3 日 ¥9,000）。</p>
+  <p class="signature">行程規劃 · 2026.04.26</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+      const target = tab.dataset.target;
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.day-section, .hotel-section-wrap').forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(target).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('.plan-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const plan = btn.dataset.plan;
+      const section = btn.closest('.day-section');
+      section.querySelectorAll('.plan-btn').forEach(b => b.classList.remove('active'));
+      section.querySelectorAll('.plan-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      section.querySelector('.plan-content[data-plan="' + plan + '"]').classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
